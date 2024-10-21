@@ -46,7 +46,7 @@ def iniciar_sesion():
             st.session_state['username'] = username
             st.session_state['tipo_usuario'] = user['tipo_usuario'].values[0]
             st.success(f"Has iniciado sesión como {username}")
-            st.experimental_rerun()
+            st.rerun()
         else:
             st.error("Nombre de usuario o contraseña incorrectos")
 
@@ -153,7 +153,7 @@ def cerrar_sesion():
         if key in st.session_state:
             del st.session_state[key]
     st.success("Has cerrado sesión exitosamente.")
-    st.experimental_rerun()
+    st.rerun()
 
 if __name__ == "__main__":
     main()
