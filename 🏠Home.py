@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 from PIL import Image
+import io
 
 # Initialize session state for databases
 if 'users_db' not in st.session_state:
@@ -9,14 +10,18 @@ if 'products_db' not in st.session_state:
     st.session_state.products_db = pd.DataFrame(columns=['creator', 'nombre', 'descripcion', 'precio', 'categoria', 'imagen'])
 if 'purchases_db' not in st.session_state:
     st.session_state.purchases_db = pd.DataFrame(columns=['buyer', 'producto', 'creator'])
+if 'creator_profiles' not in st.session_state:
+    st.session_state.creator_profiles = pd.DataFrame(columns=['username', 'nombre', 'descripcion', 'imagen'])
 
 def main():
     st.title("Plataforma de Ropa Usada y Contenido de Creadores")
     
     if 'username' not in st.session_state:
         menu = ["Inicio", "Iniciar Sesión", "Registrarse"]
+    elif st.session_state.get('tipo_usuario') == 'Creador':
+        menu = ["Inicio", "Mi Perfil", "Mi Tienda", "Añadir Producto", "Cerrar Sesión"]
     else:
-        menu = ["Inicio", "Panel de Creador", "Panel de Comprador", "Cerrar Sesión"]
+        menu = ["Inicio", "Explorar Creadores", "Mis Compras", "Cerrar Sesión"]
     
     choice = st.sidebar.selectbox("Menú", menu)
     
@@ -26,15 +31,21 @@ def main():
         iniciar_sesion()
     elif choice == "Registrarse":
         registrarse()
-    elif choice == "Panel de Creador":
-        panel_creador()
-    elif choice == "Panel de Comprador":
-        panel_comprador()
+    elif choice == "Mi Perfil":
+        mi_perfil()
+    elif choice == "Mi Tienda":
+        mi_tienda()
+    elif choice == "Añadir Producto":
+        anadir_producto()
+    elif choice == "Explorar Creadores":
+        explorar_creadores()
+    elif choice == "Mis Compras":
+        mis_compras()
     elif choice == "Cerrar Sesión":
         cerrar_sesion()
 
 def inicio():
-    st.write("Bienvenido a nuestra plataforma! Aquí puedes comprar y vender ropa usada, y los creadores pueden subir contenido digital. Para los vendedores, debes proporcionar prueba en video después de la compra para garantizar la autenticidad.")
+    st.write("Bienvenido a nuestra plataforma! Aquí puedes comprar y vender ropa usada, y los creadores pueden subir contenido digital.")
 
 def iniciar_sesion():
     st.subheader("Iniciar Sesión")
@@ -72,19 +83,64 @@ def registrarse():
         else:
             st.error("Por favor, completa todos los campos.")
 
-def panel_creador():
+def mi_perfil():
     if st.session_state.get('tipo_usuario') == 'Creador':
-        st.subheader("Panel de Creador")
-        st.write("Administra tus productos y contenido aquí.")
+        st.subheader("Mi Perfil de Creador")
+        
+        # Get existing profile or create a new one
+        profile = st.session_state.creator_profiles[st.session_state.creator_profiles['username'] == st.session_state['username']]
+        if profile.empty:
+            profile = pd.DataFrame({'username': [st.session_state['username']], 'nombre': [''], 'descripcion': [''], 'imagen': [None]})
+            st.session_state.creator_profiles = pd.concat([st.session_state.creator_profiles, profile], ignore_index=True)
+        
+        nombre = st.text_input("Nombre del perfil", value=profile['nombre'].values[0])
+        descripcion = st.text_area("Descripción del perfil", value=profile['descripcion'].values[0])
+        imagen = st.file_uploader("Imagen de perfil", type=['png', 'jpg', 'jpeg'])
+        
+        if st.button("Guardar Perfil"):
+            st.session_state.creator_profiles.loc[st.session_state.creator_profiles['username'] == st.session_state['username'], 'nombre'] = nombre
+            st.session_state.creator_profiles.loc[st.session_state.creator_profiles['username'] == st.session_state['username'], 'descripcion'] = descripcion
+            if imagen:
+                st.session_state.creator_profiles.loc[st.session_state.creator_profiles['username'] == st.session_state['username'], 'imagen'] = imagen.getvalue()
+            st.success("Perfil actualizado exitosamente!")
+            st.rerun()
+        
+        # Display current profile
+        st.subheader("Tu Perfil Actual")
+        st.write(f"Nombre: {profile['nombre'].values[0]}")
+        st.write(f"Descripción: {profile['descripcion'].values[0]}")
+        if profile['imagen'].values[0]:
+            st.image(profile['imagen'].values[0], width=200)
+    else:
+        st.error("Debes iniciar sesión como Creador para acceder a este panel.")
 
-        # Crear o actualizar perfil de creador
-        st.subheader("Perfil de Creador")
-        st.text_input("Nombre")
-        st.text_area("Descripción del perfil")
-        st.file_uploader("Sube una imagen de perfil", type=['png', 'jpg', 'jpeg'])
+def mi_tienda():
+    if st.session_state.get('tipo_usuario') == 'Creador':
+        st.subheader("Mi Tienda")
+        creator_products = st.session_state.products_db[st.session_state.products_db['creator'] == st.session_state['username']]
+        if creator_products.empty:
+            st.write("Aún no tienes productos en tu tienda. ¡Añade algunos!")
+        else:
+            for index, product in creator_products.iterrows():
+                col1, col2 = st.columns([1, 3])
+                with col1:
+                    if product['imagen']:
+                        st.image(product['imagen'], width=100)
+                with col2:
+                    st.write(f"**{product['nombre']}**")
+                    st.write(f"Precio: ${product['precio']}")
+                    st.write(f"Categoría: {product['categoria']}")
+                    if st.button(f"Eliminar {product['nombre']}"):
+                        st.session_state.products_db = st.session_state.products_db.drop(index)
+                        st.success(f"{product['nombre']} eliminado exitosamente!")
+                        st.rerun()
+                st.write("---")
+    else:
+        st.error("Debes iniciar sesión como Creador para acceder a este panel.")
 
-        # Añadir nuevo producto
-        st.subheader("Añadir Producto")
+def anadir_producto():
+    if st.session_state.get('tipo_usuario') == 'Creador':
+        st.subheader("Añadir Nuevo Producto")
         nombre_producto = st.text_input("Nombre del producto")
         descripcion_producto = st.text_area("Descripción del producto")
         precio_producto = st.number_input("Precio", min_value=0.0, step=0.01)
@@ -92,61 +148,80 @@ def panel_creador():
         imagen_producto = st.file_uploader("Subir Imagen", type=['png', 'jpg', 'jpeg'])
 
         if st.button("Añadir Producto"):
-            if imagen_producto:
+            if nombre_producto and descripcion_producto and precio_producto and categoria_producto and imagen_producto:
                 new_product = pd.DataFrame({
                     'creator': [st.session_state['username']],
                     'nombre': [nombre_producto],
                     'descripcion': [descripcion_producto],
                     'precio': [precio_producto],
                     'categoria': [categoria_producto],
-                    'imagen': [imagen_producto]
+                    'imagen': [imagen_producto.getvalue()]
                 })
                 st.session_state.products_db = pd.concat([st.session_state.products_db, new_product], ignore_index=True)
                 st.success("Producto añadido exitosamente!")
+                st.rerun()
             else:
-                st.error("Por favor sube una imagen del producto.")
-
-        # Ver productos creados
-        st.subheader("Tus Productos")
-        creator_products = st.session_state.products_db[st.session_state.products_db['creator'] == st.session_state['username']]
-        for index, product in creator_products.iterrows():
-            st.write(f"**{product['nombre']}** - ${product['precio']}")
-            st.image(product['imagen'])
-
-        # Subir prueba de video después de la compra
-        st.subheader("Subir Prueba de Video para Compras")
-        compras = st.session_state.purchases_db[st.session_state.purchases_db['creator'] == st.session_state['username']]
-        if not compras.empty:
-            for index, compra in compras.iterrows():
-                st.write(f"Compra de {compra['buyer']} para el producto: {compra['producto']}")
-                video_prueba = st.file_uploader(f"Subir prueba de video para {compra['producto']}", type=['mp4', 'mov'])
-                if st.button(f"Subir Prueba para {compra['producto']}"):
-                    st.success(f"Prueba de video para {compra['producto']} subida exitosamente.")
-
+                st.error("Por favor, completa todos los campos y sube una imagen del producto.")
     else:
         st.error("Debes iniciar sesión como Creador para acceder a este panel.")
 
-def panel_comprador():
-    if st.session_state.get('tipo_usuario') == 'Comprador':
-        st.subheader("Panel de Comprador")
-        st.write("Explora y compra productos de creadores.")
+def explorar_creadores():
+    st.subheader("Explorar Creadores")
+    for index, creator in st.session_state.creator_profiles.iterrows():
+        col1, col2 = st.columns([1, 3])
+        with col1:
+            if creator['imagen']:
+                st.image(creator['imagen'], width=100)
+        with col2:
+            st.write(f"**{creator['nombre']}**")
+            st.write(creator['descripcion'])
+            if st.button(f"Ver tienda de {creator['nombre']}"):
+                ver_tienda_creador(creator['username'])
+        st.write("---")
 
-        # Mostrar productos disponibles
-        for index, product in st.session_state.products_db.iterrows():
-            st.write(f"**{product['nombre']}** - ${product['precio']}")
-            st.image(product['imagen'])
-
+def ver_tienda_creador(creator_username):
+    st.subheader(f"Tienda de {creator_username}")
+    creator_products = st.session_state.products_db[st.session_state.products_db['creator'] == creator_username]
+    for index, product in creator_products.iterrows():
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col1:
+            if product['imagen']:
+                st.image(product['imagen'], width=100)
+        with col2:
+            st.write(f"**{product['nombre']}**")
+            st.write(product['descripcion'])
+            st.write(f"Categoría: {product['categoria']}")
+        with col3:
+            st.write(f"Precio: ${product['precio']}")
             if st.button(f"Comprar {product['nombre']}"):
-                new_purchase = pd.DataFrame({
-                    'buyer': [st.session_state['username']],
-                    'producto': [product['nombre']],
-                    'creator': [product['creator']]
-                })
-                st.session_state.purchases_db = pd.concat([st.session_state.purchases_db, new_purchase], ignore_index=True)
-                st.success(f"Compra de {product['nombre']} realizada exitosamente. El creador subirá la prueba de video pronto.")
+                realizar_compra(product)
+        st.write("---")
 
+def realizar_compra(product):
+    if 'username' in st.session_state:
+        new_purchase = pd.DataFrame({
+            'buyer': [st.session_state['username']],
+            'producto': [product['nombre']],
+            'creator': [product['creator']]
+        })
+        st.session_state.purchases_db = pd.concat([st.session_state.purchases_db, new_purchase], ignore_index=True)
+        st.success(f"Compra de {product['nombre']} realizada exitosamente!")
     else:
-        st.error("Debes iniciar sesión como Comprador para acceder a este panel.")
+        st.error("Debes iniciar sesión para realizar una compra.")
+
+def mis_compras():
+    if 'username' in st.session_state:
+        st.subheader("Mis Compras")
+        user_purchases = st.session_state.purchases_db[st.session_state.purchases_db['buyer'] == st.session_state['username']]
+        if user_purchases.empty:
+            st.write("Aún no has realizado ninguna compra.")
+        else:
+            for index, purchase in user_purchases.iterrows():
+                st.write(f"Producto: {purchase['producto']}")
+                st.write(f"Vendedor: {purchase['creator']}")
+                st.write("---")
+    else:
+        st.error("Debes iniciar sesión para ver tus compras.")
 
 def cerrar_sesion():
     for key in ['username', 'tipo_usuario']:
