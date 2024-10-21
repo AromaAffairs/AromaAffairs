@@ -61,12 +61,13 @@ def registrarse():
             if new_username in st.session_state.users_db['username'].values:
                 st.error("El nombre de usuario ya existe. Por favor, elige otro.")
             else:
-                st.session_state.users_db = st.session_state.users_db.append({
-                    'username': new_username,
-                    'email': new_email,
-                    'password': new_password,
-                    'tipo_usuario': tipo_usuario
-                }, ignore_index=True)
+                new_user = pd.DataFrame({
+                    'username': [new_username],
+                    'email': [new_email],
+                    'password': [new_password],
+                    'tipo_usuario': [tipo_usuario]
+                })
+                st.session_state.users_db = pd.concat([st.session_state.users_db, new_user], ignore_index=True)
                 st.success(f"¡Cuenta creada para {new_username} como {tipo_usuario}!")
         else:
             st.error("Por favor, completa todos los campos.")
@@ -92,14 +93,15 @@ def panel_creador():
 
         if st.button("Añadir Producto"):
             if imagen_producto:
-                st.session_state.products_db = st.session_state.products_db.append({
-                    'creator': st.session_state['username'],
-                    'nombre': nombre_producto,
-                    'descripcion': descripcion_producto,
-                    'precio': precio_producto,
-                    'categoria': categoria_producto,
-                    'imagen': imagen_producto
-                }, ignore_index=True)
+                new_product = pd.DataFrame({
+                    'creator': [st.session_state['username']],
+                    'nombre': [nombre_producto],
+                    'descripcion': [descripcion_producto],
+                    'precio': [precio_producto],
+                    'categoria': [categoria_producto],
+                    'imagen': [imagen_producto]
+                })
+                st.session_state.products_db = pd.concat([st.session_state.products_db, new_product], ignore_index=True)
                 st.success("Producto añadido exitosamente!")
             else:
                 st.error("Por favor sube una imagen del producto.")
@@ -135,11 +137,12 @@ def panel_comprador():
             st.image(product['imagen'])
 
             if st.button(f"Comprar {product['nombre']}"):
-                st.session_state.purchases_db = st.session_state.purchases_db.append({
-                    'buyer': st.session_state['username'],
-                    'producto': product['nombre'],
-                    'creator': product['creator']
-                }, ignore_index=True)
+                new_purchase = pd.DataFrame({
+                    'buyer': [st.session_state['username']],
+                    'producto': [product['nombre']],
+                    'creator': [product['creator']]
+                })
+                st.session_state.purchases_db = pd.concat([st.session_state.purchases_db, new_purchase], ignore_index=True)
                 st.success(f"Compra de {product['nombre']} realizada exitosamente. El creador subirá la prueba de video pronto.")
 
     else:
