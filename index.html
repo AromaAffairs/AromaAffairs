@@ -31,6 +31,22 @@
         .hero {
             padding: 100px 20px;
             background: linear-gradient(135deg, #2b2b2b, #1a1a1a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .hero-content {
+            flex: 1;
+            min-width: 300px;
+            max-width: 600px;
+            padding: 20px;
+        }
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            padding: 20px;
         }
         h1 {
             font-size: 3em;
@@ -61,10 +77,31 @@
             background: #e6b800;
             transform: scale(1.05);
         }
+        .purple-cta {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #9932CC; /* Deep purple color */
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            animation: purplePulse 2s infinite;
+            margin-top: 20px;
+        }
+        .purple-cta:hover {
+            background: #8A2BE2;
+            transform: scale(1.05);
+        }
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.4); }
             70% { box-shadow: 0 0 0 15px rgba(255, 204, 0, 0); }
             100% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0); }
+        }
+        @keyframes purplePulse {
+            0% { box-shadow: 0 0 0 0 rgba(153, 50, 204, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(153, 50, 204, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(153, 50, 204, 0); }
         }
         .features {
             padding: 50px 20px;
@@ -95,7 +132,13 @@
             color: #ffcc00;
             margin-top: 10px;
         }
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+            }
+            .hero-content, .hero-image {
+                max-width: 100%;
+            }
             h1 {
                 font-size: 2em;
             }
@@ -111,23 +154,37 @@
 </head>
 <body role="document">
     <header class="hero" role="banner">
-        <h1>AromaAffairs</h1>
-        <p>Tu talento es la chispa. Nosotros la hacemos fuego. Sube tu rango, domina tu imagen—huele el éxito.</p>
-        <a href="https://drive.google.com/drive/folders/1o5lwk_T-pcoVtNJ6615Bx8MRxGreGN01?usp=drive_link" 
-           target="_blank" 
-           class="cta" 
-           aria-label="Únete al Movimiento en AromaAffairs" 
-           data-action="signup" 
-           data-category="CTA" 
-           data-label="Hero Button">Únete al Movimiento</a>
-        <p class="signature">Hecho por Señor Pies </p>
+        <div class="hero-content">
+            <h1>AromaAffairs</h1>
+            <p>Tu talento es la chispa. Nosotros la hacemos fuego. Sube tu rango, domina tu imagen—huele el éxito.</p>
+            <a href="https://drive.google.com/drive/folders/1o5lwk_T-pcoVtNJ6615Bx8MRxGreGN01?usp=drive_link" 
+               target="_blank" 
+               class="cta" 
+               aria-label="Únete al Movimiento en AromaAffairs" 
+               data-action="signup" 
+               data-category="CTA" 
+               data-label="Hero Button">Únete al Movimiento</a>
+            <p class="signature">Hecho por Señor Pies </p>
+        </div>
+        <div class="hero-image">
+            
+            <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/RIGHT%20WEBIMAGE.png" alt="AromaAffairs Creator" width="400">
+            <div>
+                <a href="#" 
+                   class="purple-cta" 
+                   aria-label="Ver Creadoras en Vivo" 
+                   data-action="live-creators" 
+                   data-category="CTA" 
+                   data-label="Live Button">Creadoras en Vivo</a>
+            </div>
+        </div>
     </header>
 
     <main role="main" aria-label="Sección principal de AromaAffairs">
         <section class="features">
             <article class="feature-box" aria-labelledby="feature1">
                 <h3 id="feature1">Sube de Nivel</h3>
-                <p>Analizamos tus redes, te damos un puntaje y te empujamos pa’ arriba. Puro automático, sin rollo.</p>
+                <p>Analizamos tus redes, te damos un puntaje y te empujamos pa' arriba. Puro automático, sin rollo.</p>
             </article>
             <article class="feature-box" aria-labelledby="feature2">
                 <h3 id="feature2">Imagen Pro</h3>
@@ -155,6 +212,15 @@
             // gtag('event', 'signup', {
             //     'event_category': 'CTA',
             //     'event_label': 'Hero Button'
+            // });
+        });
+        
+        document.querySelector('.purple-cta').addEventListener('click', function() {
+            console.log('Purple CTA clicked - Creadoras en Vivo');
+            // Integración con GA4 (descomentar si usas):
+            // gtag('event', 'live-creators', {
+            //     'event_category': 'CTA',
+            //     'event_label': 'Live Button'
             // });
         });
     </script>
