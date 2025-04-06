@@ -40,7 +40,7 @@
         .hero-left-image {
             flex: 1;
             min-width: 250px;
-            max-width: 300px;
+            max-width: 350px; /* Increased from 300px */
             padding: 10px;
             text-align: left;
         }
@@ -53,14 +53,15 @@
         .hero-right-image {
             flex: 1;
             min-width: 250px;
-            max-width: 300px;
+            max-width: 350px; /* Increased from 300px */
             padding: 10px;
             text-align: right;
+            position: relative;
         }
         .creators-button-container {
             position: absolute;
-            bottom: -20px;
-            right: 20%;
+            bottom: -60px;
+            right: 0; /* Moved to the right */
             z-index: 10;
         }
         h1 {
@@ -149,7 +150,7 @@
         }
         .hero-image img {
             width: 100%;
-            max-width: 300px;
+            max-width: 350px; /* Increased from 300px */
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
         }
@@ -172,7 +173,7 @@
                 font-size: 2.5em;
             }
             .hero-image img {
-                max-width: 250px;
+                max-width: 300px;
             }
         }
         @media (max-width: 768px) {
@@ -193,7 +194,7 @@
     <header class="hero" role="banner">
         <div class="hero-left-image">
             
-            <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/left%20side.png" alt="AromaAffairs Creator Left" width="280">
+            <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/left%20side.png" alt="AromaAffairs Creator Left" width="350"> <!-- Increased from 280 -->
         </div>
         
         <div class="hero-content">
@@ -210,17 +211,17 @@
         </div>
         
         <div class="hero-right-image">
-            <!-- The right image URL - keep the same as in your screenshot -->
-            <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/RIGHT%20WEBIMAGE.png" alt="AromaAffairs Creator Right" width="280">
-        </div>
-        
-        <div class="creators-button-container">
-            <a href="#" 
-               class="purple-cta" 
-               aria-label="Ver Creadoras en Vivo" 
-               data-action="live-creators" 
-               data-category="CTA" 
-               data-label="Live Button">Creadoras en Vivo</a>
+            <!-- The right image URL - increased size -->
+            <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/RIGHT%20WEBIMAGE.png" alt="AromaAffairs Creator Right" width="350"> <!-- Increased from 280 -->
+            
+            <div class="creators-button-container">
+                <a href="#" 
+                   class="purple-cta" 
+                   aria-label="Ver Creadoras en Vivo" 
+                   data-action="live-creators" 
+                   data-category="CTA" 
+                   data-label="Live Button">Creadoras en Vivo</a>
+            </div>
         </div>
     </header>
 
