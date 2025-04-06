@@ -29,24 +29,39 @@
             to { opacity: 1; }
         }
         .hero {
-            padding: 100px 20px;
+            padding: 50px 20px;
             background: linear-gradient(135deg, #2b2b2b, #1a1a1a);
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            position: relative;
+        }
+        .hero-left-image {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            padding: 10px;
+            text-align: left;
         }
         .hero-content {
-            flex: 1;
+            flex: 2;
             min-width: 300px;
             max-width: 600px;
             padding: 20px;
         }
-        .hero-image {
+        .hero-right-image {
             flex: 1;
-            min-width: 300px;
-            max-width: 500px;
-            padding: 20px;
+            min-width: 250px;
+            max-width: 300px;
+            padding: 10px;
+            text-align: right;
+        }
+        .creators-button-container {
+            position: absolute;
+            bottom: -20px;
+            right: 20%;
+            z-index: 10;
         }
         h1 {
             font-size: 3em;
@@ -104,7 +119,7 @@
             100% { box-shadow: 0 0 0 0 rgba(153, 50, 204, 0); }
         }
         .features {
-            padding: 50px 20px;
+            padding: 80px 20px 50px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -132,13 +147,35 @@
             color: #ffcc00;
             margin-top: 10px;
         }
-        @media (max-width: 768px) {
+        .hero-image img {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
+        }
+        @media (max-width: 992px) {
             .hero {
                 flex-direction: column;
+                padding-bottom: 80px;
             }
-            .hero-content, .hero-image {
+            .hero-left-image, .hero-content, .hero-right-image {
                 max-width: 100%;
+                text-align: center;
             }
+            .creators-button-container {
+                position: relative;
+                bottom: 0;
+                right: 0;
+                margin-top: 20px;
+            }
+            h1 {
+                font-size: 2.5em;
+            }
+            .hero-image img {
+                max-width: 250px;
+            }
+        }
+        @media (max-width: 768px) {
             h1 {
                 font-size: 2em;
             }
@@ -154,6 +191,11 @@
 </head>
 <body role="document">
     <header class="hero" role="banner">
+        <div class="hero-left-image">
+            
+            <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/left%20side.png" alt="AromaAffairs Creator Left" width="280">
+        </div>
+        
         <div class="hero-content">
             <h1>AromaAffairs</h1>
             <p>Tu talento es la chispa. Nosotros la hacemos fuego. Sube tu rango, domina tu imagen—huele el éxito.</p>
@@ -164,19 +206,21 @@
                data-action="signup" 
                data-category="CTA" 
                data-label="Hero Button">Únete al Movimiento</a>
-            <p class="signature">Hecho por Señor Pies </p>
+            <p class="signature">Hecho por Señor Pies</p>
         </div>
-        <div class="hero-image">
-            
-            <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/RIGHT%20WEBIMAGE.png" alt="AromaAffairs Creator" width="400">
-            <div>
-                <a href="#" 
-                   class="purple-cta" 
-                   aria-label="Ver Creadoras en Vivo" 
-                   data-action="live-creators" 
-                   data-category="CTA" 
-                   data-label="Live Button">Creadoras en Vivo</a>
-            </div>
+        
+        <div class="hero-right-image">
+            <!-- The right image URL - keep the same as in your screenshot -->
+            <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/RIGHT%20WEBIMAGE.png" alt="AromaAffairs Creator Right" width="280">
+        </div>
+        
+        <div class="creators-button-container">
+            <a href="#" 
+               class="purple-cta" 
+               aria-label="Ver Creadoras en Vivo" 
+               data-action="live-creators" 
+               data-category="CTA" 
+               data-label="Live Button">Creadoras en Vivo</a>
         </div>
     </header>
 
