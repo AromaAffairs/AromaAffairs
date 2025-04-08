@@ -241,15 +241,108 @@
         </section>
     </main>
 
-    <footer role="contentinfo">
-        <p>© 2025 AromaAffairs.co | Huele el Futuro</p>
-        <p>This website contains links to platforms featuring adult content. By accessing this site, you confirm you are at least 18 years of age (or the legal age in your jurisdiction). All individuals featured on linked platforms have voluntarily chosen to create adult content. We do not host adult content directly but provide referral links to third-party platforms. We are not responsible for the content hosted on these platforms.</p>
-        <a href="https://docs.google.com/document/d/your-brand-preview" 
-           target="_blank" 
-           rel="noopener noreferrer" 
-           aria-label="Ver documento de imagen de marca">Únete</a>
-    </footer>
+<footer role="contentinfo" class="site-footer">
+    <div class="footer-container">
+        <div class="footer-main">
+            <div class="footer-brand">
+                <p>© 2025 AromaAffairs.co | Huele el Futuro</p>
+                <a href="https://docs.google.com/document/d/your-brand-preview" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="join-link">Únete</a>
+            </div>
+            <nav class="footer-links">
+                <a href="#">Términos</a>
+                <a href="#">Privacidad</a>
+                <a href="#">Contacto</a>
+            </nav>
+        </div>
+        <div class="footer-disclaimer">
+            <small>Este sitio contiene enlaces a plataformas con contenido para adultos. Al acceder, confirma ser mayor de 18 años (o la edad legal en su jurisdicción). Las personas que aparecen en las plataformas vinculadas han elegido voluntariamente crear contenido para adultos. No alojamos contenido directamente, solo proporcionamos enlaces de referencia a plataformas de terceros.</small>
+        </div>
+    </div>
+</footer>
 
+<style>
+.site-footer {
+    background-color: #1a1a1a;
+    color: #aaaaaa;
+    padding: 20px 0;
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 15px;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+}
+
+.footer-brand p {
+    margin: 0;
+    margin-right: 20px;
+}
+
+.join-link {
+    color: #ff6b6b;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.join-link:hover {
+    color: #ff8e8e;
+}
+
+.footer-links a {
+    color: #aaaaaa;
+    text-decoration: none;
+    margin-left: 15px;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #ffffff;
+}
+
+.footer-disclaimer {
+    line-height: 1.5;
+}
+
+.footer-disclaimer small {
+    opacity: 0.7;
+}
+
+@media (max-width: 768px) {
+    .footer-main {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .footer-brand {
+        margin-bottom: 15px;
+    }
+    
+    .footer-links a {
+        margin: 0 15px 0 0;
+    }
+}
+</style>
+    
     <script>
         document.querySelector('.cta').addEventListener('click', function() {
             console.log('CTA clicked - Únete al Movimiento');
