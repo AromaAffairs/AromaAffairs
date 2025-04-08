@@ -60,7 +60,7 @@
             margin-left: 10px;
         }
 
-        /* Header and navigation styles */
+        /* Header and navigation styles - FIXED */
         .main-header {
             background-color: #131825;
             padding: 15px 30px;
@@ -83,6 +83,13 @@
         .main-nav {
             display: flex;
             gap: 20px;
+            align-items: center;
+        }
+        .nav-item-container {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
         }
         .nav-item {
             color: white;
@@ -90,6 +97,8 @@
             padding: 8px 12px;
             font-weight: 500;
             transition: color 0.3s;
+            display: flex;
+            align-items: center;
         }
         .nav-item:hover {
             color: #ffcc00;
@@ -97,6 +106,7 @@
         .dropdown {
             position: relative;
             display: inline-block;
+            height: 100%;
         }
         .dropdown-content {
             display: none;
@@ -106,6 +116,8 @@
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 100;
             border-radius: 4px;
+            top: 100%;
+            left: 0;
         }
         .dropdown-content a {
             color: white;
@@ -120,11 +132,9 @@
         .dropdown:hover .dropdown-content {
             display: block;
         }
-        .dropdown .nav-item::after {
-            content: "▼";
+        .dropdown .nav-item .dropdown-icon {
             font-size: 0.7em;
             margin-left: 5px;
-            vertical-align: middle;
         }
 
         /* Mobile menu styles */
@@ -371,8 +381,39 @@
 
             .main-nav {
                 display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background-color: #131825;
+                flex-direction: column;
+                z-index: 100;
+                padding: 10px 0;
             }
             .mobile-menu-button {
+                display: block;
+            }
+            .nav-item-container {
+                width: 100%;
+            }
+            .nav-item {
+                width: 100%;
+                padding: 12px 20px;
+                justify-content: center;
+                box-sizing: border-box;
+            }
+            .dropdown {
+                width: 100%;
+            }
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+            }
+            .dropdown:hover .dropdown-content {
+                display: none;
+            }
+            .dropdown.active .dropdown-content {
                 display: block;
             }
         }
@@ -423,10 +464,12 @@
         </div>
         
         <nav class="main-nav">
-            <a href="#" class="nav-item">Talleres</a>
+            <div class="nav-item-container">
+                <a href="#" class="nav-item">Talleres</a>
+            </div>
             
             <div class="dropdown">
-                <a href="#" class="nav-item">Cursos</a>
+                <a href="#" class="nav-item">Cursos <span class="dropdown-icon">▼</span></a>
                 <div class="dropdown-content">
                     <a href="#">Curso Señor Pies</a>
                     <a href="#">Curso Fansly</a>
@@ -434,10 +477,12 @@
                 </div>
             </div>
             
-            <a href="#" class="nav-item">Libros</a>
+            <div class="nav-item-container">
+                <a href="#" class="nav-item">Libros</a>
+            </div>
             
             <div class="dropdown">
-                <a href="#" class="nav-item">Media</a>
+                <a href="#" class="nav-item">Media <span class="dropdown-icon">▼</span></a>
                 <div class="dropdown-content">
                     <a href="#">Videos</a>
                     <a href="#">Podcasts</a>
@@ -445,9 +490,17 @@
                 </div>
             </div>
             
-            <a href="#" class="nav-item">Asociarse con nosotros</a>
-            <a href="#" class="nav-item">Acerca de la agencia</a>
-            <a href="#" class="nav-item">Carreras</a>
+            <div class="nav-item-container">
+                <a href="#" class="nav-item">Asociarse con nosotros</a>
+            </div>
+            
+            <div class="nav-item-container">
+                <a href="#" class="nav-item">Acerca de la agencia</a>
+            </div>
+            
+            <div class="nav-item-container">
+                <a href="#" class="nav-item">Carreras</a>
+            </div>
         </nav>
         
         <button class="mobile-menu-button">☰</button>
@@ -567,6 +620,16 @@
             const mainNav = document.querySelector('.main-nav');
             mainNav.style.display = mainNav.style.display === 'flex' ? 'none' : 'flex';
         });
+        
+        // For mobile dropdown menus
+        if (window.innerWidth <= 992) {
+            document.querySelectorAll('.dropdown').forEach(function(dropdown) {
+                dropdown.querySelector('.nav-item').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                });
+            });
+        }
     </script>
 </body>
 </html>
