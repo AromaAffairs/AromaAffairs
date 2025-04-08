@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <title>AromaAffairs - Eleva Tu Juego de Creador</title>
     <style>
+        /* Reset and base styles */
         body {
             margin: 0;
             padding: 0;
@@ -28,6 +29,115 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
+
+        /* Notification bar styles */
+        .notification-bar {
+            background-color: #7200ff;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            font-weight: 500;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .notification-bar .new-badge {
+            background-color: #fff;
+            color: #000;
+            border-radius: 20px;
+            padding: 3px 10px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .notification-bar a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .notification-bar .arrow {
+            margin-left: 10px;
+        }
+
+        /* Header and navigation styles */
+        .main-header {
+            background-color: #131825;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-container a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+        .logo-container img {
+            height: 30px;
+            margin-right: 10px;
+        }
+        .main-nav {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-item:hover {
+            color: #ffcc00;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #131825;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 100;
+            border-radius: 4px;
+        }
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+        }
+        .dropdown-content a:hover {
+            background-color: #1f2637;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown .nav-item::after {
+            content: "▼";
+            font-size: 0.7em;
+            margin-left: 5px;
+            vertical-align: middle;
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu-button {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        
+        /* Hero styles */
         .hero {
             padding: 50px 20px;
             background: linear-gradient(135deg, #2b2b2b, #1a1a1a);
@@ -180,6 +290,62 @@
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
         }
+        
+        /* Footer styles */
+        .site-footer {
+            background-color: #1a1a1a;
+            color: #aaaaaa;
+            padding: 20px 0;
+            font-family: 'Arial', sans-serif;
+            font-size: 12px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .footer-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+            margin-bottom: 15px;
+        }
+        .footer-brand {
+            display: flex;
+            align-items: center;
+        }
+        .footer-brand p {
+            margin: 0;
+            margin-right: 20px;
+        }
+        .join-link {
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .join-link:hover {
+            color: #ff8e8e;
+        }
+        .footer-links a {
+            color: #aaaaaa;
+            text-decoration: none;
+            margin-left: 15px;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+        .footer-disclaimer {
+            line-height: 1.5;
+        }
+        .footer-disclaimer small {
+            opacity: 0.7;
+        }
+
+        /* Responsive styles */
         @media (max-width: 992px) {
             .hero {
                 flex-direction: column;
@@ -202,6 +368,13 @@
             .hero-image img {
                 max-width: 250px;
             }
+
+            .main-nav {
+                display: none;
+            }
+            .mobile-menu-button {
+                display: block;
+            }
         }
         @media (max-width: 768px) {
             h1 {
@@ -214,13 +387,74 @@
                 flex: 1 1 100%;
                 max-width: 100%;
             }
+            .footer-main {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .footer-brand {
+                margin-bottom: 15px;
+            }
+            .footer-links a {
+                margin: 0 15px 0 0;
+            }
+            .notification-bar {
+                font-size: 0.9em;
+                padding: 8px 10px;
+            }
         }
     </style>
 </head>
 <body role="document">
+    <!-- Notification Bar -->
+    <div class="notification-bar">
+        <span class="new-badge">NEW</span>
+        <span>Curso Del Señor PIes 2025</span>
+        <a href="#">GRATIS <span class="arrow">→</span></a>
+    </div>
+
+    <!-- Main Header -->
+    <header class="main-header">
+        <div class="logo-container">
+            <a href="#">
+                <!-- Replace with your own logo -->
+                <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/LOGO.png" alt="AromaAffairs Logo">
+                AROMAAFFAIRS.COM
+            </a>
+        </div>
+        
+        <nav class="main-nav">
+            <a href="#" class="nav-item">Workshops</a>
+            
+            <div class="dropdown">
+                <a href="#" class="nav-item">Cursos</a>
+                <div class="dropdown-content">
+                    <a href="#">Curso Señor Pies</a>
+                    <a href="#">Curso Fansly</a>
+                    <a href="#">Curso Streamer</a>
+                </div>
+            </div>
+            
+            <a href="#" class="nav-item">Libros</a>
+            
+            <div class="dropdown">
+                <a href="#" class="nav-item">Media</a>
+                <div class="dropdown-content">
+                    <a href="#">Videos</a>
+                    <a href="#">Podcasts</a>
+                    <a href="#">Artículos</a>
+                </div>
+            </div>
+            
+            <a href="#" class="nav-item">Asociarse con nosotros</a>
+            <a href="#" class="nav-item">Acerca de la agencia</a>
+            <a href="#" class="nav-item">Carreras</a>
+        </nav>
+        
+        <button class="mobile-menu-button">☰</button>
+    </header>
+
     <header class="hero" role="banner">
         <div class="hero-left-image">
-            
             <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/left%20side.png" alt="AromaAffairs Creator Left" width="280">
         </div>
         
@@ -238,7 +472,6 @@
         </div>
         
         <div class="hero-right-image">
-            <!-- The right image URL - kept original size -->
             <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/RIGHT%20WEBIMAGE.png" alt="AromaAffairs Creator Right" width="280">
         </div>
         
@@ -279,107 +512,27 @@
         </section>
     </main>
 
-<footer role="contentinfo" class="site-footer">
-    <div class="footer-container">
-        <div class="footer-main">
-            <div class="footer-brand">
-                <p>© 2025 AromaAffairs | Huele el Futuro</p>
-                <a href="https://docs.google.com/document/d/your-brand-preview" 
-                   target="_blank" 
-                   rel="noopener noreferrer" 
-                   class="join-link">Únete</a>
+    <footer role="contentinfo" class="site-footer">
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <p>© 2025 AromaAffairs | Huele el Futuro</p>
+                    <a href="https://docs.google.com/document/d/your-brand-preview" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="join-link">Únete</a>
+                </div>
+                <nav class="footer-links">
+                    <a href="#">Términos</a>
+                    <a href="#">Privacidad</a>
+                    <a href="#">Contacto</a>
+                </nav>
             </div>
-            <nav class="footer-links">
-                <a href="#">Términos</a>
-                <a href="#">Privacidad</a>
-                <a href="#">Contacto</a>
-            </nav>
+            <div class="footer-disclaimer">
+                <small>Este sitio contiene enlaces a plataformas con contenido para adultos. Al acceder, confirma ser mayor de 18 años (o la edad legal en su jurisdicción). Las personas que aparecen en las plataformas vinculadas han elegido voluntariamente crear contenido para adultos. No alojamos contenido directamente, solo proporcionamos enlaces de referencia a plataformas de terceros.</small>
+            </div>
         </div>
-        <div class="footer-disclaimer">
-            <small>Este sitio contiene enlaces a plataformas con contenido para adultos. Al acceder, confirma ser mayor de 18 años (o la edad legal en su jurisdicción). Las personas que aparecen en las plataformas vinculadas han elegido voluntariamente crear contenido para adultos. No alojamos contenido directamente, solo proporcionamos enlaces de referencia a plataformas de terceros.</small>
-        </div>
-    </div>
-</footer>
-
-<style>
-.site-footer {
-    background-color: #1a1a1a;
-    color: #aaaaaa;
-    padding: 20px 0;
-    font-family: 'Arial', sans-serif;
-    font-size: 12px;
-}
-
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.footer-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #333;
-    margin-bottom: 15px;
-}
-
-.footer-brand {
-    display: flex;
-    align-items: center;
-}
-
-.footer-brand p {
-    margin: 0;
-    margin-right: 20px;
-}
-
-.join-link {
-    color: #ff6b6b;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-.join-link:hover {
-    color: #ff8e8e;
-}
-
-.footer-links a {
-    color: #aaaaaa;
-    text-decoration: none;
-    margin-left: 15px;
-    transition: color 0.3s;
-}
-
-.footer-links a:hover {
-    color: #ffffff;
-}
-
-.footer-disclaimer {
-    line-height: 1.5;
-}
-
-.footer-disclaimer small {
-    opacity: 0.7;
-}
-
-@media (max-width: 768px) {
-    .footer-main {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .footer-brand {
-        margin-bottom: 15px;
-    }
-    
-    .footer-links a {
-        margin: 0 15px 0 0;
-    }
-}
-</style>
+    </footer>
     
     <script>
         document.querySelector('.cta').addEventListener('click', function() {
@@ -407,6 +560,12 @@
             //     'event_category': 'CTA',
             //     'event_label': 'Fansly Button'
             // });
+        });
+        
+        // Mobile menu toggle functionality
+        document.querySelector('.mobile-menu-button').addEventListener('click', function() {
+            const mainNav = document.querySelector('.main-nav');
+            mainNav.style.display = mainNav.style.display === 'flex' ? 'none' : 'flex';
         });
     </script>
 </body>
