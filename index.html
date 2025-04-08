@@ -63,6 +63,12 @@
             right: 30px;
             z-index: 10;
         }
+        .fansly-button-container {
+            position: absolute;
+            bottom: 0;
+            left: 30px;
+            z-index: 10;
+        }
         h1 {
             font-size: 3em;
             margin: 0;
@@ -108,6 +114,22 @@
             background: #8A2BE2;
             transform: scale(1.05);
         }
+        .fansly-cta {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #0090ff; /* Fansly blue color */
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            animation: fanslyPulse 2s infinite;
+            margin-top: 20px;
+        }
+        .fansly-cta:hover {
+            background: #007ad9;
+            transform: scale(1.05);
+        }
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.4); }
             70% { box-shadow: 0 0 0 15px rgba(255, 204, 0, 0); }
@@ -117,6 +139,11 @@
             0% { box-shadow: 0 0 0 0 rgba(153, 50, 204, 0.4); }
             70% { box-shadow: 0 0 0 15px rgba(153, 50, 204, 0); }
             100% { box-shadow: 0 0 0 0 rgba(153, 50, 204, 0); }
+        }
+        @keyframes fanslyPulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 144, 255, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(0, 144, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 144, 255, 0); }
         }
         .features {
             padding: 80px 20px 50px;
@@ -162,10 +189,11 @@
                 max-width: 100%;
                 text-align: center;
             }
-            .creators-button-container {
+            .creators-button-container, .fansly-button-container {
                 position: relative;
                 bottom: 0;
                 right: 0;
+                left: 0;
                 margin-top: 20px;
             }
             h1 {
@@ -214,14 +242,24 @@
             <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/RIGHT%20WEBIMAGE.png" alt="AromaAffairs Creator Right" width="280">
         </div>
         
-<div class="creators-button-container">
-    <a href="https://tango.me/deeplink/q/?target=agent&ref_id=pPg5DDY94nKeU50nj3tpRg&marketing_fl=3" 
-       class="purple-cta" 
-       aria-label="Ver Creadoras en Vivo" 
-       data-action="live-creators" 
-       data-category="CTA" 
-       data-label="Live Button">Creadoras en Vivo</a>
-</div>
+        <div class="creators-button-container">
+            <a href="https://tango.me/deeplink/q/?target=agent&ref_id=pPg5DDY94nKeU50nj3tpRg&marketing_fl=3" 
+            class="purple-cta" 
+            aria-label="Ver Creadoras en Vivo" 
+            data-action="live-creators" 
+            data-category="CTA" 
+            data-label="Live Button">Creadoras en Vivo</a>
+        </div>
+
+        <div class="fansly-button-container">
+            <a href="https://fansly.com/application/form?r=LatamImage" 
+            target="_blank" 
+            class="fansly-cta" 
+            aria-label="Aplicar en Fansly" 
+            data-action="fansly-application" 
+            data-category="CTA" 
+            data-label="Fansly Button">Aplicar en Fansly</a>
+        </div>
     </header>
 
     <main role="main" aria-label="Sección principal de AromaAffairs">
@@ -359,6 +397,15 @@
             // gtag('event', 'live-creators', {
             //     'event_category': 'CTA',
             //     'event_label': 'Live Button'
+            // });
+        });
+        
+        document.querySelector('.fansly-cta').addEventListener('click', function() {
+            console.log('Fansly CTA clicked - Aplicar en Fansly');
+            // Integración con GA4 (descomentar si usas):
+            // gtag('event', 'fansly-application', {
+            //     'event_category': 'CTA',
+            //     'event_label': 'Fansly Button'
             // });
         });
     </script>
