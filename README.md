@@ -11,7 +11,7 @@ Welcome to **AromaAffairs**—a toolkit to help creators level up their online p
 1. **Visit the Site**: Check out [https://aromaaffairs.github.io/AromaAffairs](https://aromaaffairs.github.io/AromaAffairs) for a preview.
 2. **Clone the Repo**:
    ```bash
-   git clone https://github.com/AromaAffairs/AromaAffairs.git
+   ####git clone https://github.com/AromaAffairs/AromaAffairs.git
 Run Locally: Open index.html in a browser to see the static site.
 Usage
 Explore the landing page for creator tools and affiliate opportunities.
@@ -36,11 +36,11 @@ How do I contribute? See .
 Contributing
 We’re open to ideas! Fork this repo, submit a pull request, or open an issue to suggest features. See  for details.
 
-Support
+  #####Support
 Need help? Open an issue or contact us for premium support (coming soon).
 
-Disclaimer
+######Disclaimer
 This project links to third-party platforms, some of which may host mature content. No explicit material is stored here—see our site for details. For industry-specific use cases, deploy extensions on platforms compliant with your needs.
 
-Contact
+#######Contact
 Built by SeñorPies for Latam Image. Reach out via GitHub Issues or check our Medium article.
