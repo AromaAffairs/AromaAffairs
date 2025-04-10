@@ -189,6 +189,13 @@
             left: 30px;
             z-index: 10;
         }
+        .chaturbate-button-container {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
         h1 {
             font-size: 3em;
             margin: 0;
@@ -250,6 +257,22 @@
             background: #007ad9;
             transform: scale(1.05);
         }
+        .chaturbate-cta {
+            display: inline-block;
+            padding: 15px 30px;
+            background: #F7941E; /* Chaturbate orange */
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            animation: chaturbatePulse 2s infinite;
+            margin-top: 20px;
+        }
+        .chaturbate-cta:hover {
+            background: #E07B00; /* Darker orange for hover */
+            transform: scale(1.05);
+        }
         @keyframes pulse {
             0% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.4); }
             70% { box-shadow: 0 0 0 15px rgba(255, 204, 0, 0); }
@@ -264,6 +287,11 @@
             0% { box-shadow: 0 0 0 0 rgba(0, 144, 255, 0.4); }
             70% { box-shadow: 0 0 0 15px rgba(0, 144, 255, 0); }
             100% { box-shadow: 0 0 0 0 rgba(0, 144, 255, 0); }
+        }
+        @keyframes chaturbatePulse {
+            0% { box-shadow: 0 0 0 0 rgba(247, 148, 30, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(247, 148, 30, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(247, 148, 30, 0); }
         }
         .features {
             padding: 80px 20px 50px;
@@ -365,7 +393,7 @@
                 max-width: 100%;
                 text-align: center;
             }
-            .creators-button-container, .fansly-button-container {
+            .creators-button-container, .fansly-button-container, .chaturbate-button-container {
                 position: relative;
                 bottom: 0;
                 right: 0;
@@ -475,6 +503,7 @@
                     <a href="#">Curso Fansly</a>
                     <a href="#">Curso Streamer</a>
                     <a href="#">Curso SofiaGray</a>
+                    <a href="#">Curso Chaturbate</a>
                 </div>
             </div>
             
@@ -500,22 +529,15 @@
             </div>
             
             <div class="dropdown">
-  <a href="#" class="nav-item">Vende Tus Prendas <span class="dropdown-icon">▼</span></a>
-  <div class="dropdown-content">
-    <a href="https://sofiagray.com/?rel=1295943">Inicio</a>
-    <a href="https://sofiagray.com/sell-now-step-1/?rel=1295943">Vender Ahora</a>
-    <a href="https://sofiagray.com/about-us/?rel=1295943">Sobre Nosotros</a>
-    <a href="https://sofiagray.com/sell-used-socks/?rel=1295943">Vende tus Calcetas</a>
-    <a href="https://sofiagray.com/only-fans-alternative/?rel=1295943">Alternativa a OnlyFans</a>
-  </div>
-</div>
-            
-
-
-</div>
-
-
-            
+                <a href="#" class="nav-item">Vende Tus Prendas <span class="dropdown-icon">▼</span></a>
+                <div class="dropdown-content">
+                    <a href="https://sofiagray.com/?rel=1295943">Inicio</a>
+                    <a href="https://sofiagray.com/sell-now-step-1/?rel=1295943">Vender Ahora</a>
+                    <a href="https://sofiagray.com/about-us/?rel=1295943">Sobre Nosotros</a>
+                    <a href="https://sofiagray.com/sell-used-socks/?rel=1295943">Vende tus Calcetas</a>
+                    <a href="https://sofiagray.com/only-fans-alternative/?rel=1295943">Alternativa a OnlyFans</a>
+                </div>
+            </div>
         </nav>
         
         <button class="mobile-menu-button">☰</button>
@@ -536,6 +558,15 @@
                data-action="signup" 
                data-category="CTA" 
                data-label="Hero Button">Únete al Movimiento</a>
+            <div class="chaturbate-button-container">
+                <a href="https://aromaaffairsco.chaturbate.com/" 
+                   target="_blank" 
+                   class="chaturbate-cta" 
+                   aria-label="Stream en Chaturbate" 
+                   data-action="chaturbate-stream" 
+                   data-category="CTA" 
+                   data-label="Chaturbate Button">Stream para adultos</a>
+            </div>
             <p class="signature">Hecho por Latam Image</p>
         </div>
         
@@ -545,21 +576,21 @@
         
         <div class="creators-button-container">
             <a href="https://tango.me/deeplink/q/?target=agent&ref_id=pPg5DDY94nKeU50nj3tpRg&marketing_fl=3" 
-            class="purple-cta" 
-            aria-label="Ver Creadoras en Vivo" 
-            data-action="live-creators" 
-            data-category="CTA" 
-            data-label="Live Button">Creadoras en Vivo</a>
+               class="purple-cta" 
+               aria-label="Ver Creadoras en Vivo" 
+               data-action="live-creators" 
+               data-category="CTA" 
+               data-label="Live Button">Creadoras en Vivo</a>
         </div>
 
         <div class="fansly-button-container">
             <a href="https://fansly.com/application/form?r=LatamImage" 
-            target="_blank" 
-            class="fansly-cta" 
-            aria-label="Aplicar en Fansly" 
-            data-action="fansly-application" 
-            data-category="CTA" 
-            data-label="Fansly Button">Aplicar en Fansly</a>
+               target="_blank" 
+               class="fansly-cta" 
+               aria-label="Aplicar en Fansly" 
+               data-action="fansly-application" 
+               data-category="CTA" 
+               data-label="Fansly Button">Aplicar en Fansly</a>
         </div>
     </header>
 
@@ -627,6 +658,15 @@
             // gtag('event', 'fansly-application', {
             //     'event_category': 'CTA',
             //     'event_label': 'Fansly Button'
+            // });
+        });
+        
+        document.querySelector('.chaturbate-cta').addEventListener('click', function() {
+            console.log('Chaturbate CTA clicked - Stream en Chaturbate');
+            // Integración con GA4 (descomentar si usas):
+            // gtag('event', 'chaturbate-stream', {
+            //     'event_category': 'CTA',
+            //     'event_label': 'Chaturbate Button'
             // });
         });
         
