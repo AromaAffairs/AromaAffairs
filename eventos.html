@@ -10,7 +10,7 @@
     <meta property="og:title" content="Eventos - AromaAffairs">
     <meta property="og:description" content="Únete a eventos como el Concurso de Pies o crea el tuyo en AromaAffairs.">
     <meta property="og:image" content="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/main/aroma.png">
-    <meta property="og:url" content="https://aromaaffairs.github.io/eventos.html">
+    <meta property="og:url" content="https://aromaaffairs.co/eventos.html">
     <link rel="icon" href="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/main/LOGO.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <title>Eventos - AromaAffairs</title>
@@ -180,4 +180,176 @@
         footer {
             padding: 20px;
             background: #111;
-            font-size:
+            font-size: 0.9em;
+            color: #888;
+        }
+        @media (max-width: 992px) {
+            .main-nav {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background-color: #131825;
+                flex-direction: column;
+                z-index: 100;
+                padding: 10px 0;
+            }
+            .mobile-menu-button {
+                display: block;
+            }
+            .nav-item {
+                width: 100%;
+                padding: 12px 20px;
+                justify-content: center;
+            }
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+            }
+            .dropdown:hover .dropdown-content {
+                display: none;
+            }
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
+        }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            .event-card {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="logo-container">
+            <a href="/index.html">
+                <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/main/LOGO.png" alt="AromaAffairs Logo">
+                AROMAAFFAIRS.CO
+            </a>
+        </div>
+        <nav class="main-nav">
+            <div class="dropdown">
+                <a href="#" class="nav-item">Talleres <span class="dropdown-icon">▼</span></a>
+                <div class="dropdown-content">
+                    <a href="/eventos.html">Eventos</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="nav-item">Cursos <span class="dropdown-icon">▼</span></a>
+                <div class="dropdown-content">
+                    <a href="https://drive.google.com/drive/folders/151hzbVUyRwl-noW9HLqvCfbTCTyKR0Jw?usp=sharing">Curso Señor Pies</a>
+                    <a href="#">Curso Fansly</a>
+                    <a href="#">Curso Streamer</a>
+                    <a href="#">Curso SofiaGray</a>
+                    <a href="#">Curso Chaturbate</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-item">Libros</a>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="nav-item">Media <span class="dropdown-icon">▼</span></a>
+                <div class="dropdown-content">
+                    <a href="https://www.youtube.com/shorts/IWHyvpCy5q4">Videos</a>
+                    <a href="#">Podcasts</a>
+                    <a href="https://medium.com/@senorpiesco/se%C3%B1or-pies-por-qu%C3%A9-tuve-que-crear-una-plataforma-6e207a897a13" target="_blank">Artículos</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="nav-item">Asociarse con nosotros <span class="dropdown-icon">▼</span></a>
+                <div class="dropdown-content">
+                    <a href="https://t.mbslr2.com/370315/8780/32506?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN">JerkMate Colombia</a>
+                    <a href="https://t.mbslr2.com/370315/8780/32514?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN">Latinas Al Poder</a>
+                    <a href="https://t.mbslr2.com/370315/8780/32496?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN">Mandar y obedecer - Juego de rol</a>
+                    <a href="https://t.mbslr2.com/370315/8780/32498?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN">Cosplay</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="nav-item">Tu Clon Digital <span class="dropdown-icon">▼</span></a>
+                <div class="dropdown-content">
+                    <a href="https://t.slext1.com/370315/9022/37137?aff_sub5=SF_006OG000004lmDN">Automatiza Tu Presencia</a>
+                    <a href="https://t.slext1.com/370315/9022/0?aff_sub5=SF_006OG000004lmDN">Réplica virtual</a>
+                    <a href="https://t.slext1.com/370315/9022/35508?aff_sub5=SF_006OG000004lmDN">Generador De imagen</a>
+                    <a href="https://t.slext1.com/370315/9022/34380?aff_sub5=SF_006OG000004lmDN">Tu novio de la ia✨</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="nav-item">Vende Tus Prendas <span class="dropdown-icon">▼</span></a>
+                <div class="dropdown-content">
+                    <a href="https://sofiagray.com/?rel=1295943">Inicio</a>
+                    <a href="https://sofiagray.com/sell-now-step-1/?rel=1295943">Vender Ahora</a>
+                    <a href="https://sofiagray.com/about-us/?rel=1295943">Sobre Nosotros</a>
+                    <a href="https://sofiagray.com/sell-used-socks/?rel=1295943">Vende tus Calcetas</a>
+                    <a href="https://sofiagray.com/only-fans-alternative/?rel=1295943">Alternativa a OnlyFans</a>
+                </div>
+            </div>
+        </nav>
+        <button class="mobile-menu-button">☰</button>
+    </header>
+
+    <!-- Event Section -->
+    <section class="event-section">
+        <h1>Eventos de AromaAffairs</h1>
+        <p>Únete a eventos como el Concurso de Pies o crea el tuyo propio.</p>
+        <a href="https://forms.gle/your-google-form-link" target="_blank" class="cta">Crear Nuevo Evento</a>
+
+        <!-- Event List -->
+        <div class="event-list">
+            <!-- Concurso de Pies -->
+            <div class="event-card">
+                <img src="https://via.placeholder.com/300x200?text=Concurso+de+Pies" alt="Concurso de Pies">
+                <h3>Concurso de Pies</h3>
+                <p><strong>Fecha:</strong> 2025-05-15</p>
+                <p><strong>Hora:</strong> 18:00</p>
+                <p><strong>Descripción:</strong> ¡Muestra tu creatividad en nuestro Concurso de Pies! Comparte tu mejor foto y compite por premios increíbles.</p>
+                <p><strong>1er Premio:</strong> $200 USD</p>
+                <p><strong>2do Premio:</strong> $100 USD</p>
+                <p><strong>3er Premio:</strong> $50 USD</p>
+                <a href="#" class="join-button" data-event-id="concurso-de-pies">Unirse al Evento</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 AromaAffairs | Huele el Futuro</p>
+        <nav>
+            <a href="#">Términos</a> | <a href="#">Privacidad</a> | <a href="#">Contacto</a>
+        </nav>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-button').addEventListener('click', function() {
+            const mainNav = document.querySelector('.main-nav');
+            mainNav.style.display = mainNav.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Mobile dropdown toggle
+        if (window.innerWidth <= 992) {
+            document.querySelectorAll('.dropdown').forEach(function(dropdown) {
+                dropdown.querySelector('.nav-item').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    dropdown.classList.toggle('active');
+                });
+            });
+        }
+
+        // Join button placeholder
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('join-button')) {
+                e.preventDefault();
+                const eventId = e.target.getAttribute('data-event-id');
+                alert(`Solicitud para unirse al evento "${eventId}" enviada.`);
+            }
+        });
+    </script>
+</body>
+</html>
