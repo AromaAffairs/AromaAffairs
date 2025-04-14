@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <title>Eventos - AromaAffairs</title>
     <style>
+        /* Reset and base styles */
         body {
             margin: 0;
             padding: 0;
@@ -28,12 +29,46 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
+
+        /* Notification bar styles */
+        .notification-bar {
+            background-color: #7200ff;
+            color: white;
+            text-align: center;
+            padding: 10px 20px;
+            font-weight: 500;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        .notification-bar .new-badge {
+            background-color: #fff;
+            color: #000;
+            border-radius: 20px;
+            padding: 3px 10px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .notification-bar a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .notification-bar .arrow {
+            margin-left: 10px;
+        }
+
+        /* Header and navigation styles */
         .main-header {
             background-color: #131825;
             padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
+            z-index: 1001;
         }
         .logo-container a {
             display: flex;
@@ -52,6 +87,15 @@
             gap: 20px;
             align-items: center;
         }
+        .main-nav.active {
+            display: flex;
+        }
+        .nav-item-container {
+            position: relative;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
         .nav-item {
             color: white;
             text-decoration: none;
@@ -67,6 +111,7 @@
         .dropdown {
             position: relative;
             display: inline-block;
+            height: 100%;
         }
         .dropdown-content {
             display: none;
@@ -96,6 +141,21 @@
             font-size: 0.7em;
             margin-left: 5px;
         }
+        .close-menu {
+            display: none;
+            color: #ffcc00;
+            text-decoration: none;
+            padding: 12px 20px;
+            font-weight: bold;
+            font-size: 1.2em;
+            width: 100%;
+            text-align: center;
+        }
+        .close-menu:hover {
+            background-color: #1f2637;
+        }
+
+        /* Mobile menu styles */
         .mobile-menu-button {
             display: none;
             background: none;
@@ -103,16 +163,29 @@
             color: white;
             font-size: 1.5em;
             cursor: pointer;
+            z-index: 1002;
         }
+
+        /* Event section styles */
         .event-section {
             padding: 50px 20px;
             background: linear-gradient(135deg, #2b2b2b, #1a1a1a);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         h1 {
-            font-size: 2.5em;
+            font-size: 3em;
             color: #ffcc00;
             text-shadow: 0 0 10px #ffcc00;
             margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            max-width: 600px;
+            margin: 20px auto;
+            color: #ccc;
         }
         .cta {
             display: inline-block;
@@ -124,6 +197,7 @@
             border-radius: 5px;
             transition: all 0.3s ease;
             margin: 20px 0;
+            animation: pulse 2s infinite;
         }
         .cta:hover {
             background: #e6b800;
@@ -172,41 +246,132 @@
             border-radius: 5px;
             margin-top: 10px;
             transition: all 0.3s ease;
+            animation: purplePulse 2s infinite;
         }
         .join-button:hover {
             background: #8A2BE2;
             transform: scale(1.05);
         }
-        footer {
-            padding: 20px;
-            background: #111;
-            font-size: 0.9em;
-            color: #888;
+        .back-btn {
+            display: inline-block;
+            margin-top: 40px;
+            padding: 15px 30px;
+            background: #7200ff;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            animation: purplePulse 2s infinite;
         }
+        .back-btn:hover {
+            background: #5a00cc;
+            transform: scale(1.05);
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 204, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 204, 0, 0); }
+        }
+        @keyframes purplePulse {
+            0% { box-shadow: 0 0 0 0 rgba(114, 0, 255, 0.4); }
+            70% { box-shadow: 0 0 0 15px rgba(114, 0, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(114, 0, 255, 0); }
+        }
+
+        /* Footer styles */
+        .site-footer {
+            background-color: #1a1a1a;
+            color: #aaaaaa;
+            padding: 20px 0;
+            font-family: 'Arial', sans-serif;
+            font-size: 12px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .footer-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+            margin-bottom: 15px;
+        }
+        .footer-brand {
+            display: flex;
+            align-items: center;
+        }
+        .footer-brand p {
+            margin: 0;
+            margin-right: 20px;
+        }
+        .join-link {
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .join-link:hover {
+            color: #ff8e8e;
+        }
+        .footer-links a {
+            color: #aaaaaa;
+            text-decoration: none;
+            margin-left: 15px;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+        .footer-disclaimer {
+            line-height: 1.5;
+        }
+        .footer-disclaimer small {
+            opacity: 0.7;
+        }
+
+        /* Responsive styles */
         @media (max-width: 992px) {
-            .main-nav {
-                display: none;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background-color: #131825;
-                flex-direction: column;
-                z-index: 100;
-                padding: 10px 0;
-            }
             .mobile-menu-button {
                 display: block;
+            }
+            .main-nav {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #131825;
+                flex-direction: column;
+                z-index: 1000;
+                padding: 60px 20px 20px;
+                overflow-y: auto;
+            }
+            .main-nav.active {
+                display: flex;
+            }
+            .nav-item-container {
+                width: 100%;
             }
             .nav-item {
                 width: 100%;
                 padding: 12px 20px;
                 justify-content: center;
+                box-sizing: border-box;
+                font-size: 1.2em;
+            }
+            .dropdown {
+                width: 100%;
             }
             .dropdown-content {
                 position: static;
                 width: 100%;
                 box-shadow: none;
+                background-color: #1f2637;
             }
             .dropdown:hover .dropdown-content {
                 display: none;
@@ -214,31 +379,75 @@
             .dropdown.active .dropdown-content {
                 display: block;
             }
-        }
-        @media (max-width: 768px) {
+            .close-menu {
+                display: block;
+            }
             h1 {
-                font-size: 2em;
+                font-size: 2.5em;
             }
             .event-card {
                 max-width: 100%;
             }
         }
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            p {
+                font-size: 1em;
+            }
+            .event-section {
+                padding: 30px 10px;
+            }
+            .cta, .join-button, .back-btn {
+                padding: 12px 20px;
+                font-size: 0.9em;
+            }
+            .notification-bar {
+                font-size: 0.9em;
+                padding: 8px 10px;
+            }
+            .main-nav {
+                padding: 50px 10px 10px;
+            }
+            .nav-item {
+                font-size: 1em;
+            }
+            .footer-main {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .footer-brand {
+                margin-bottom: 15px;
+            }
+            .footer-links a {
+                margin: 0 15px 0 0;
+            }
+        }
     </style>
 </head>
-<body>
-    <!-- Header -->
+<body role="document">
+    <!-- Notification Bar -->
+    <div class="notification-bar">
+        <span class="new-badge">Nuevo</span>
+        <span>Curso Del Señor Pies 2025</span>
+        <a href="https://drive.google.com/drive/u/9/folders/151hzbVUyRwl-noW9HLqvCfbTCTyKR0Jw">GRATIS <span class="arrow">→</span></a>
+    </div>
+
+    <!-- Main Header -->
     <header class="main-header">
         <div class="logo-container">
-            <a href="/index.html">
+            <a href="index.html">
                 <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/main/LOGO.png" alt="AromaAffairs Logo">
                 AROMAAFFAIRS.CO
             </a>
         </div>
         <nav class="main-nav">
+            <a href="#" class="close-menu">Cerrar</a>
             <div class="dropdown">
-                <a href="#" class="nav-item">Talleres <span class="dropdown-icon">▼</span></a>
+                <a href="#" class="nav-item">Eventos <span class="dropdown-icon">▼</span></a>
                 <div class="dropdown-content">
-                    <a href="/eventos.html">Eventos</a>
+                    <a href="eventos.html">Concurso</a>
                 </div>
             </div>
             <div class="dropdown">
@@ -251,8 +460,8 @@
                     <a href="#">Curso Chaturbate</a>
                 </div>
             </div>
-            <div class="nav-item">
-                <a href="#" class="nav-item">Libros</a>
+            <div class="nav-item-container">
+                <a href="creators.html" class="nav-item">Creators</a>
             </div>
             <div class="dropdown">
                 <a href="#" class="nav-item">Media <span class="dropdown-icon">▼</span></a>
@@ -295,61 +504,31 @@
     </header>
 
     <!-- Event Section -->
-    <section class="event-section">
-        <h1>Eventos de AromaAffairs</h1>
-        <p>Únete a eventos como el Concurso de Pies o crea el tuyo propio.</p>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSe8uwYce32C0EcGAIhZYHiR7706aRFDJCiLXMQ6vkpPqjHJTg/viewform" target="_blank" class="cta">Crear Nuevo Evento</a>
+    <main role="main" aria-label="Eventos de AromaAffairs">
+        <section class="event-section">
+            <h1>Eventos de AromaAffairs</h1>
+            <p>Únete a eventos como el Concurso de Pies o crea el tuyo propio.</p>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe8uwYce32C0EcGAIhZYHiR7706aRFDJCiLXMQ6vkpPqjHJTg/viewform" 
+               target="_blank" 
+               class="cta" 
+               aria-label="Crear Nuevo Evento">Crear Nuevo Evento</a>
 
-        <!-- Event List -->
-        <div class="event-list">
-            <!-- Concurso de Pies -->
-            <div class="event-card">
-                <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/LOGO.png" alt="Concurso de Pies">
-                <h3>Concurso de Pies</h3>
-                <p><strong>Fecha:</strong> 2025-05-15</p>
-                <p><strong>Hora:</strong> 18:00</p>
-                <p><strong>Descripción:</strong> ¡Muestra tu creatividad en nuestro Concurso de Pies! Comparte tu mejor foto y compite por premios increíbles.</p>
-                <p><strong>1er Premio:</strong> $200 USD</p>
-                <p><strong>2do Premio:</strong> $100 USD</p>
-                <p><strong>3er Premio:</strong> $50 USD</p>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSe8uwYce32C0EcGAIhZYHiR7706aRFDJCiLXMQ6vkpPqjHJTg/viewform" class="join-button" data-event-id="concurso-de-pies">Unirse al Evento</a>
+            <!-- Event List -->
+            <div class="event-list">
+                <!-- Concurso de Pies -->
+                <div class="event-card">
+                    <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/LOGO.png" alt="Concurso de Pies">
+                    <h3>Concurso de Pies</h3>
+                    <p><strong>Fecha:</strong> 2025-05-15</p>
+                    <p><strong>Hora:</strong> 18:00</p>
+                    <p><strong>Descripción:</strong> ¡Muestra tu creatividad en nuestro Concurso de Pies! Comparte tu mejor foto y compite por premios increíbles.</p>
+                    <p><strong>1er Premio:</strong> $200 USD</p>
+                    <p><strong>2do Premio:</strong> $100 USD</p>
+                    <p><strong>3er Premio:</strong> $50 USD</p>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSe8uwYce32C0EcGAIhZYHiR7706aRFDJCiLXMQ6vkpPqjHJTg/viewform" 
+                       class="join-button" 
+                       data-event-id="concurso-de-pies" 
+                       aria-label="Unirse al Concurso de Pies">Unirse al Evento</a>
+                </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <p>© 2025 AromaAffairs | Huele el Futuro</p>
-        <nav>
-            <a href="#">Términos</a> | <a href="#">Privacidad</a> | <a href="#">Contacto</a>
-        </nav>
-    </footer>
-
-    <script>
-        // Mobile menu toggle
-        document.querySelector('.mobile-menu-button').addEventListener('click', function() {
-            const mainNav = document.querySelector('.main-nav');
-            mainNav.style.display = mainNav.style.display === 'flex' ? 'none' : 'flex';
-        });
-
-        // Mobile dropdown toggle
-        if (window.innerWidth <= 992) {
-            document.querySelectorAll('.dropdown').forEach(function(dropdown) {
-                dropdown.querySelector('.nav-item').addEventListener('click', function(e) {
-                    e.preventDefault();
-                    dropdown.classList.toggle('active');
-                });
-            });
-        }
-
-        // Join button placeholder
-        document.addEventListener('click', function(e) {
-            if (e.target.classList.contains('join-button')) {
-                e.preventDefault();
-                const eventId = e.target.getAttribute('data-event-id');
-                alert(`Solicitud para unirse al evento "${eventId}" enviada.`);
-            }
-        });
-    </script>
-</body>
-</html>
+            <a href="index.html" class="back-btn"
