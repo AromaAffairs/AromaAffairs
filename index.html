@@ -60,13 +60,14 @@
             margin-left: 10px;
         }
 
-        /* Header and navigation styles - FIXED */
+        /* Header and navigation styles */
         .main-header {
             background-color: #131825;
             padding: 15px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
         .logo-container a {
             display: flex;
@@ -84,6 +85,9 @@
             display: flex;
             gap: 20px;
             align-items: center;
+        }
+        .main-nav.active {
+            display: flex;
         }
         .nav-item-container {
             position: relative;
@@ -146,7 +150,7 @@
             font-size: 1.5em;
             cursor: pointer;
         }
-        
+
         /* Hero styles */
         .hero {
             padding: 50px 20px;
@@ -228,7 +232,7 @@
         .purple-cta {
             display: inline-block;
             padding: 15px 30px;
-            background: #9932CC; /* Deep purple color */
+            background: #9932CC;
             color: #ffffff;
             text-decoration: none;
             font-weight: bold;
@@ -244,7 +248,7 @@
         .fansly-cta {
             display: inline-block;
             padding: 15px 30px;
-            background: #0090ff; /* Fansly blue color */
+            background: #0090ff;
             color: #ffffff;
             text-decoration: none;
             font-weight: bold;
@@ -260,7 +264,7 @@
         .chaturbate-cta {
             display: inline-block;
             padding: 15px 30px;
-            background: #F7941E; /* Chaturbate orange */
+            background: #F7941E;
             color: #ffffff;
             text-decoration: none;
             font-weight: bold;
@@ -270,7 +274,7 @@
             margin-top: 20px;
         }
         .chaturbate-cta:hover {
-            background: #E07B00; /* Darker orange for hover */
+            background: #E07B00;
             transform: scale(1.05);
         }
         @keyframes pulse {
@@ -328,7 +332,7 @@
             border-radius: 8px;
             box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
         }
-        
+
         /* Footer styles */
         .site-footer {
             background-color: #1a1a1a;
@@ -385,6 +389,50 @@
 
         /* Responsive styles */
         @media (max-width: 992px) {
+            .mobile-menu-button {
+                display: block;
+            }
+            .main-nav {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: #131825;
+                flex-direction: column;
+                z-index: 1000;
+                padding: 20px;
+                overflow-y: auto;
+            }
+            .main-nav.active {
+                display: flex;
+            }
+            .nav-item-container {
+                width: 100%;
+            }
+            .nav-item {
+                width: 100%;
+                padding: 12px 20px;
+                justify-content: center;
+                box-sizing: border-box;
+                font-size: 1.2em;
+            }
+            .dropdown {
+                width: 100%;
+            }
+            .dropdown-content {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                background-color: #1f2637;
+            }
+            .dropdown:hover .dropdown-content {
+                display: none;
+            }
+            .dropdown.active .dropdown-content {
+                display: block;
+            }
             .hero {
                 flex-direction: column;
                 padding-bottom: 80px;
@@ -406,44 +454,6 @@
             }
             .hero-image img {
                 max-width: 250px;
-            }
-
-            .main-nav {
-                display: none;
-                position: absolute;
-                top: 70px;
-                left: 0;
-                right: 0;
-                background-color: #131825;
-                flex-direction: column;
-                z-index: 100;
-                padding: 10px 0;
-            }
-            .mobile-menu-button {
-                display: block;
-            }
-            .nav-item-container {
-                width: 100%;
-            }
-            .nav-item {
-                width: 100%;
-                padding: 12px 20px;
-                justify-content: center;
-                box-sizing: border-box;
-            }
-            .dropdown {
-                width: 100%;
-            }
-            .dropdown-content {
-                position: static;
-                width: 100%;
-                box-shadow: none;
-            }
-            .dropdown:hover .dropdown-content {
-                display: none;
-            }
-            .dropdown.active .dropdown-content {
-                display: block;
             }
         }
         @media (max-width: 768px) {
@@ -471,6 +481,12 @@
                 font-size: 0.9em;
                 padding: 8px 10px;
             }
+            .main-nav {
+                padding: 10px;
+            }
+            .nav-item {
+                font-size: 1em;
+            }
         }
     </style>
 </head>
@@ -482,28 +498,22 @@
         <a href="https://drive.google.com/drive/u/9/folders/151hzbVUyRwl-noW9HLqvCfbTCTyKR0Jw">GRATIS <span class="arrow">→</span></a>
     </div>
 
-
-
-
-
     <!-- Main Header -->
     <header class="main-header">
         <div class="logo-container">
             <a href="#">
-                <!-- Replace with your own logo -->
                 <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/LOGO.png" alt="AromaAffairs Logo">
                 AROMAAFFAIRS.CO
             </a>
         </div>
-        
-<div class="dropdown">
-    <a href="#" class="nav-item">Eventos <span class="dropdown-icon">▼</span></a>
-    <div class="dropdown-content">
-        <a href="/eventos.html">Consurso</a>
-        <a href="creators.html">Creators</a>
-    </div>
-</div>
-            
+        <nav class="main-nav">
+            <div class="dropdown">
+                <a href="#" class="nav-item">Eventos <span class="dropdown-icon">▼</span></a>
+                <div class="dropdown-content">
+                    <a href="/eventos.html">Concurso</a>
+                    <a href="creators.html">Creators</a>
+                </div>
+            </div>
             <div class="dropdown">
                 <a href="#" class="nav-item">Cursos <span class="dropdown-icon">▼</span></a>
                 <div class="dropdown-content">
@@ -514,11 +524,9 @@
                     <a href="#">Curso Chaturbate</a>
                 </div>
             </div>
-            
             <div class="nav-item-container">
-                <a href="#" class="nav-item">Libros</a>
+                <a href="#" class="nav-item">Creators</a>
             </div>
-            
             <div class="dropdown">
                 <a href="#" class="nav-item">Media <span class="dropdown-icon">▼</span></a>
                 <div class="dropdown-content">
@@ -527,9 +535,7 @@
                     <a href="https://medium.com/@senorpiesco/se%C3%B1or-pies-por-qu%C3%A9-tuve-que-crear-una-plataforma-6e207a897a13" target="_blank">Artículos</a>
                 </div>
             </div>
-            
-
-                        <div class="dropdown">
+            <div class="dropdown">
                 <a href="#" class="nav-item">Asociarse con nosotros <span class="dropdown-icon">▼</span></a>
                 <div class="dropdown-content">
                     <a href="https://t.mbslr2.com/370315/8780/32506?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN">JerkMate Colombia</a>
@@ -538,17 +544,15 @@
                     <a href="https://t.mbslr2.com/370315/8780/32498?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN">Cosplay</a>
                 </div>
             </div>
-            
             <div class="dropdown">
                 <a href="#" class="nav-item">Tu Clon Digital <span class="dropdown-icon">▼</span></a>
                 <div class="dropdown-content">
                     <a href="https://t.slext1.com/370315/9022/37137?aff_sub5=SF_006OG000004lmDN">Automatiza Tu Presencia</a>
-                    <a href="https://t.slext1.com/370315/9022/0?aff_sub5=SF_006OG000004lmDN">Réplica virtual </a>
+                    <a href="https://t.slext1.com/370315/9022/0?aff_sub5=SF_006OG000004lmDN">Réplica virtual</a>
                     <a href="https://t.slext1.com/370315/9022/35508?aff_sub5=SF_006OG000004lmDN">Generador De imagen</a>
                     <a href="https://t.slext1.com/370315/9022/34380?aff_sub5=SF_006OG000004lmDN">Tu novio de la ia✨</a>
-                    </div>
                 </div>
-            
+            </div>
             <div class="dropdown">
                 <a href="#" class="nav-item">Vende Tus Prendas <span class="dropdown-icon">▼</span></a>
                 <div class="dropdown-content">
@@ -560,7 +564,6 @@
                 </div>
             </div>
         </nav>
-        
         <button class="mobile-menu-button">☰</button>
     </header>
 
@@ -568,7 +571,6 @@
         <div class="hero-left-image">
             <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/left%20side.png" alt="AromaAffairs Creator Left" width="280">
         </div>
-        
         <div class="hero-content">
             <h1>AromaAffairs</h1>
             <p>Tu talento es la chispa. Nosotros la hacemos fuego. Sube tu rango, domina tu imagen—huele el éxito.</p>
@@ -579,14 +581,11 @@
                data-action="signup" 
                data-category="CTA" 
                data-label="Hero Button">Únete al Movimiento</a>
-
             <p class="signature">Hecho por Latam Image</p>
         </div>
-        
         <div class="hero-right-image">
             <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/RIGHT%20WEBIMAGE.png" alt="AromaAffairs Creator Right" width="280">
         </div>
-        
         <div class="creators-button-container">
             <a href="https://tango.me/deeplink/q/?target=agent&ref_id=pPg5DDY94nKeU50nj3tpRg&marketing_fl=3" 
                class="purple-cta" 
@@ -595,17 +594,15 @@
                data-category="CTA" 
                data-label="Live Button">Creadoras en Vivo</a>
         </div>
-
         <div class="chaturbate-button-container">
-                <a href="https://aromaaffairsco.chaturbate.com/" 
-                   target="_blank" 
-                   class="chaturbate-cta" 
-                   aria-label="Stream en Chaturbate" 
-                   data-action="chaturbate-stream" 
-                   data-category="CTA" 
-                   data-label="Chaturbate Button">Stream para adultos</a>
-            </div>
-
+            <a href="https://aromaaffairsco.chaturbate.com/" 
+               target="_blank" 
+               class="chaturbate-cta" 
+               aria-label="Stream en Chaturbate" 
+               data-action="chaturbate-stream" 
+               data-category="CTA" 
+               data-label="Chaturbate Button">Stream para adultos</a>
+        </div>
         <div class="fansly-button-container">
             <a href="https://fansly.com/application/form?r=LatamImage" 
                target="_blank" 
@@ -655,59 +652,49 @@
             </div>
         </div>
     </footer>
-    
+
     <script>
+        // Mobile menu toggle functionality
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mainNav = document.querySelector('.main-nav');
+
+        mobileMenuButton.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            mobileMenuButton.textContent = mainNav.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!mainNav.contains(event.target) && !mobileMenuButton.contains(event.target)) {
+                mainNav.classList.remove('active');
+                mobileMenuButton.textContent = '☰';
+            }
+        });
+
+        // Toggle dropdowns on mobile
+        document.querySelectorAll('.dropdown .nav-item').forEach(function(navItem) {
+            navItem.addEventListener('click', function(e) {
+                if (window.innerWidth <= 992) {
+                    e.preventDefault();
+                    const dropdown = navItem.parentElement;
+                    dropdown.classList.toggle('active');
+                }
+            });
+        });
+
+        // CTA event listeners
         document.querySelector('.cta').addEventListener('click', function() {
             console.log('CTA clicked - Únete al Movimiento');
-            // Integración con GA4 (descomentar si usas):
-            // gtag('event', 'signup', {
-            //     'event_category': 'CTA',
-            //     'event_label': 'Hero Button'
-            // });
         });
-        
         document.querySelector('.purple-cta').addEventListener('click', function() {
             console.log('Purple CTA clicked - Creadoras en Vivo');
-            // Integración con GA4 (descomentar si usas):
-            // gtag('event', 'live-creators', {
-            //     'event_category': 'CTA',
-            //     'event_label': 'Live Button'
-            // });
         });
-        
         document.querySelector('.fansly-cta').addEventListener('click', function() {
             console.log('Fansly CTA clicked - Aplicar en Fansly');
-            // Integración con GA4 (descomentar si usas):
-            // gtag('event', 'fansly-application', {
-            //     'event_category': 'CTA',
-            //     'event_label': 'Fansly Button'
-            // });
         });
-        
         document.querySelector('.chaturbate-cta').addEventListener('click', function() {
             console.log('Chaturbate CTA clicked - Stream en Chaturbate');
-            // Integración con GA4 (descomentar si usas):
-            // gtag('event', 'chaturbate-stream', {
-            //     'event_category': 'CTA',
-            //     'event_label': 'Chaturbate Button'
-            // });
         });
-        
-        // Mobile menu toggle functionality
-        document.querySelector('.mobile-menu-button').addEventListener('click', function() {
-            const mainNav = document.querySelector('.main-nav');
-            mainNav.style.display = mainNav.style.display === 'flex' ? 'none' : 'flex';
-        });
-        
-        // For mobile dropdown menus
-        if (window.innerWidth <= 992) {
-            document.querySelectorAll('.dropdown').forEach(function(dropdown) {
-                dropdown.querySelector('.nav-item').addEventListener('click', function(e) {
-                    e.preventDefault();
-                    dropdown.classList.toggle('active');
-                });
-            });
-        }
     </script>
 </body>
 </html>
