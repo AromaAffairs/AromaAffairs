@@ -108,6 +108,10 @@
         .nav-item:hover {
             color: #ffcc00;
         }
+        .nav-item.active {
+            color: #ffcc00;
+            border-bottom: 2px solid #ffcc00;
+        }
         .dropdown {
             position: relative;
             display: inline-block;
@@ -445,7 +449,7 @@
         <nav class="main-nav">
             <a href="#" class="close-menu">Cerrar</a>
             <div class="dropdown">
-                <a href="#" class="nav-item">Eventos <span class="dropdown-icon">▼</span></a>
+                <a href="#" class="nav-item active">Eventos <span class="dropdown-icon">▼</span></a>
                 <div class="dropdown-content">
                     <a href="eventos.html">Concurso</a>
                 </div>
@@ -531,4 +535,79 @@
                        aria-label="Unirse al Concurso de Pies">Unirse al Evento</a>
                 </div>
             </div>
-            <a href="index.html" class="back-btn"
+            <a href="index.html" class="back-btn" aria-label="Volver a la página principal">Volver</a>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo" class="site-footer">
+        <div class="footer-container">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <p>© 2025 AromaAffairs | Huele el Futuro</p>
+                    <a href="https://docs.google.com/document/d/your-brand-preview" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="join-link">Únete</a>
+                </div>
+                <nav class="footer-links">
+                    <a href="#">Términos</a>
+                    <a href="#">Privacidad</a>
+                    <a href="#">Contacto</a>
+                </nav>
+            </div>
+            <div class="footer-disclaimer">
+                <small>Este sitio contiene enlaces a plataformas con contenido para adultos. Al acceder, confirma ser mayor de 18 años (o la edad legal en su jurisdicción). Las personas que aparecen en las plataformas vinculadas han elegido voluntariamente crear contenido para adultos. No alojamos contenido directamente, solo proporcionamos enlaces de referencia a plataformas de terceros.</small>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mainNav = document.querySelector('.main-nav');
+        const closeMenuLink = document.querySelector('.close-menu');
+
+        function toggleMenu() {
+            mainNav.classList.toggle('active');
+            mobileMenuButton.textContent = mainNav.classList.contains('active') ? '✕' : '☰';
+        }
+
+        mobileMenuButton.addEventListener('click', toggleMenu);
+
+        closeMenuLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            mainNav.classList.remove('active');
+            mobileMenuButton.textContent = '☰';
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!mainNav.contains(event.target) && !mobileMenuButton.contains(event.target)) {
+                mainNav.classList.remove('active');
+                mobileMenuButton.textContent = '☰';
+            }
+        });
+
+        // Toggle dropdowns on mobile
+        document.querySelectorAll('.dropdown .nav-item').forEach(function(navItem) {
+            navItem.addEventListener('click', function(e) {
+                if (window.innerWidth <= 992) {
+                    e.preventDefault();
+                    const dropdown = navItem.parentElement;
+                    dropdown.classList.toggle('active');
+                }
+            });
+        });
+
+        // Join button placeholder
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('join-button')) {
+                e.preventDefault();
+                const eventId = e.target.getAttribute('data-event-id');
+                alert(`Solicitud para unirse al evento "${eventId}" enviada.`);
+            }
+        });
+    </script>
+</body>
+</html>
