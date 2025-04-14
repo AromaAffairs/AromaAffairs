@@ -68,6 +68,7 @@
             justify-content: space-between;
             align-items: center;
             position: relative;
+            z-index: 1001;
         }
         .logo-container a {
             display: flex;
@@ -140,6 +141,19 @@
             font-size: 0.7em;
             margin-left: 5px;
         }
+        .close-menu {
+            display: none;
+            color: #ffcc00;
+            text-decoration: none;
+            padding: 12px 20px;
+            font-weight: bold;
+            font-size: 1.2em;
+            width: 100%;
+            text-align: center;
+        }
+        .close-menu:hover {
+            background-color: #1f2637;
+        }
 
         /* Mobile menu styles */
         .mobile-menu-button {
@@ -149,6 +163,7 @@
             color: white;
             font-size: 1.5em;
             cursor: pointer;
+            z-index: 1002;
         }
 
         /* Hero styles */
@@ -402,7 +417,7 @@
                 background-color: #131825;
                 flex-direction: column;
                 z-index: 1000;
-                padding: 20px;
+                padding: 60px 20px 20px;
                 overflow-y: auto;
             }
             .main-nav.active {
@@ -431,6 +446,9 @@
                 display: none;
             }
             .dropdown.active .dropdown-content {
+                display: block;
+            }
+            .close-menu {
                 display: block;
             }
             .hero {
@@ -482,7 +500,7 @@
                 padding: 8px 10px;
             }
             .main-nav {
-                padding: 10px;
+                padding: 50px 10px 10px;
             }
             .nav-item {
                 font-size: 1em;
@@ -507,11 +525,11 @@
             </a>
         </div>
         <nav class="main-nav">
+            <a href="#" class="close-menu">Cerrar</a>
             <div class="dropdown">
                 <a href="#" class="nav-item">Eventos <span class="dropdown-icon">▼</span></a>
                 <div class="dropdown-content">
                     <a href="/eventos.html">Concurso</a>
-                    <a href="creators.html">Creators</a>
                 </div>
             </div>
             <div class="dropdown">
@@ -525,7 +543,7 @@
                 </div>
             </div>
             <div class="nav-item-container">
-                <a href="#" class="nav-item">Creators</a>
+                <a href="creators.html" class="nav-item">Creators</a>
             </div>
             <div class="dropdown">
                 <a href="#" class="nav-item">Media <span class="dropdown-icon">▼</span></a>
@@ -657,10 +675,19 @@
         // Mobile menu toggle functionality
         const mobileMenuButton = document.querySelector('.mobile-menu-button');
         const mainNav = document.querySelector('.main-nav');
+        const closeMenuLink = document.querySelector('.close-menu');
 
-        mobileMenuButton.addEventListener('click', function() {
+        function toggleMenu() {
             mainNav.classList.toggle('active');
             mobileMenuButton.textContent = mainNav.classList.contains('active') ? '✕' : '☰';
+        }
+
+        mobileMenuButton.addEventListener('click', toggleMenu);
+
+        closeMenuLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            mainNav.classList.remove('active');
+            mobileMenuButton.textContent = '☰';
         });
 
         // Close menu when clicking outside
