@@ -15,7 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <title>AromaAffairs - Eleva Tu Juego de Creador</title>
     <style>
-        /* Reset and base styles */
+        /* Existing styles unchanged, adding new styles for terms, privacy, and age gate */
         * {
             box-sizing: border-box;
         }
@@ -445,7 +445,7 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
-            z-index: 1004; /* Changed to be above the mobile menu (z-index: 1003) */
+            z-index: 1004;
         }
         .bottom-banner a {
             color: white;
@@ -507,6 +507,125 @@
         }
         .footer-disclaimer small {
             opacity: 0.7;
+        }
+
+        /* New styles for terms, privacy, and age gate */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1005;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            background: #131825;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            color: #ccc;
+            position: relative;
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-20px); }
+            to { transform: translateY(0); }
+        }
+        .modal-content h2 {
+            color: #ffcc00;
+            margin-top: 0;
+        }
+        .modal-content h3 {
+            color: #ffffff;
+        }
+        .modal-content p {
+            font-size: 1em;
+            margin: 10px 0;
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            color: #ffcc00;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        #age-gate {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+        #age-gate.active {
+            display: flex;
+        }
+        .age-gate-content {
+            background: #131825;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            color: #ccc;
+        }
+        .age-gate-content h2 {
+            color: #ffcc00;
+        }
+        .age-gate-content p {
+            font-size: 1em;
+        }
+        .age-gate-content a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+        .age-gate-content a:hover {
+            text-decoration: underline;
+        }
+        .age-gate-content button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .age-gate-content button.enter {
+            background: #ffcc00;
+            color: #1a1a1a;
+        }
+        .age-gate-content button.enter:hover {
+            background: #e6b800;
+            transform: scale(1.05);
+        }
+        .age-gate-content button.leave {
+            background: #7200ff;
+            color: #fff;
+        }
+        .age-gate-content button.leave:hover {
+            background: #5a00cc;
+            transform: scale(1.05);
         }
 
         /* Responsive styles */
@@ -624,10 +743,63 @@
             .nav-item {
                 font-size: 1em;
             }
+            .modal-content {
+                padding: 1.5rem;
+            }
+            .age-gate-content {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
 <body role="document">
+    <!-- Age Verification Popup -->
+    <div id="age-gate">
+        <div class="age-gate-content">
+            <h2>Verificación de Edad</h2>
+            <p>Debes tener 18 años o más para acceder a este sitio.</p>
+            <p>Al hacer clic en "Entrar", aceptas nuestros <a href="#" onclick="showTerms()">Términos de Uso</a> y <a href="#" onclick="showPrivacy()">Política de Privacidad</a>.</p>
+            <button class="enter" onclick="enterSite()">Soy mayor de 18</button>
+            <button class="leave" onclick="window.location.href='https://www.google.com'">Salir</button>
+        </div>
+    </div>
+
+    <!-- Terms of Use Modal -->
+    <div id="terms-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('terms-modal')">&times;</button>
+            <h2>Términos de Uso</h2>
+            <p>Última actualización: 16 de abril de 2025</p>
+            <p>Al acceder a esta plataforma ("Sitio"), aceptas estar vinculado por los siguientes términos y condiciones. Si no estás de acuerdo, por favor abandona el sitio inmediatamente.</p>
+            <h3>1. Descargo de Responsabilidad sobre el Contenido</h3>
+            <p>Este sitio no aloja, produce ni controla el contenido al que los usuarios pueden ser redirigidos. Todos los enlaces se proporcionan solo como referencia, y los usuarios son los únicos responsables del contenido al que eligen acceder.</p>
+            <h3>2. Restricciones de Edad</h3>
+            <p>Este sitio está destinado exclusivamente para adultos. Debes tener al menos 18 años (o 21 en algunas jurisdicciones) para acceder o usar este sitio. Al usar el sitio, confirmas que cumples con los requisitos de edad de las leyes locales.</p>
+            <h3>3. Enlaces a Terceros</h3>
+            <p>Esta plataforma puede contener enlaces a sitios web externos, incluido contenido para adultos. No somos responsables del contenido, la precisión o la disponibilidad de dichos sitios de terceros. Úsalos bajo tu propio riesgo.</p>
+            <h3>4. Responsabilidad del Usuario</h3>
+            <p>Eres responsable de cumplir con todas las leyes locales, estatales y federales aplicables en el uso de este sitio. Reconoces y aceptas la plena responsabilidad de tus acciones.</p>
+            <h3>5. Modificaciones</h3>
+            <p>Nos reservamos el derecho de actualizar estos Términos de Uso en cualquier momento. El uso continuado del sitio tras dichos cambios constituye tu aceptación de los nuevos términos.</p>
+            <p>Para preguntas o inquietudes, contáctanos en <a href="mailto:contact@aromaaffairs.co">contact@aromaaffairs.co</a>.</p>
+        </div>
+    </div>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacy-modal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('privacy-modal')">&times;</button>
+            <h2>Política de Privacidad</h2>
+            <p>Última actualización: 16 de abril de 2025</p>
+            <p>Nos tomamos tu privacidad en serio. Este sitio no recopila información personal de los usuarios directamente. No requerimos registro, y no rastreamos a los usuarios más allá de herramientas analíticas básicas (si las hay).</p>
+            <h3>Cookies y Analíticas</h3>
+            <p>Este sitio puede usar cookies anónimas para mejorar la experiencia del usuario o analizar patrones de tráfico. No se almacena ni recopila información personalmente identificable.</p>
+            <h3>Enlaces a Terceros</h3>
+            <p>Los enlaces proporcionados en este sitio pueden redirigirte a sitios web de terceros. Estos sitios pueden tener sus propias políticas de privacidad y podrían recopilar información personal. Recomendamos a los usuarios leer sus políticas de privacidad.</p>
+            <p>Si tienes alguna pregunta sobre esta política, contáctanos en <a href="mailto:contact@aromaaffairs.co">contact@aromaaffairs.co</a>.</p>
+        </div>
+    </div>
+
     <!-- Notification Bar (Fixed) -->
     <div class="notification-bar">
         <span class="new-badge">Nuevo</span>
@@ -639,7 +811,7 @@
     <header class="main-header">
         <div class="logo-container">
             <a href="#">
-                <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/LOGO.png" alt="AromaAffairs Logo">
+                <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main CLEAR/LOGO.png" alt="AromaAffairs Logo">
                 AROMAAFFAIRS.CO
             </a>
         </div>
@@ -659,7 +831,7 @@
                     <a href="#">Curso Streamer</a>
                     <a href="#">Curso SofiaGray</a>
                     <a href="#">Curso Chaturbate</a>
-                    <a href="https://www.adultcreatorsonline.com/products/unlimited-lifetime-access-whole-store-all-future-releases-included?ref=LATAMIMAGE">Acceso de por vida</a>
+31: <a href="https://www.adultcreatorsonline.com/products/unlimited-lifetime-access-whole-store-all-future-releases-included?ref=LATAMIMAGE">Acceso de por vida</a>
                 </div>
             </div>
             <div class="dropdown">
@@ -805,9 +977,9 @@
                        class="join-link">Únete</a>
                 </div>
                 <nav class="footer-links">
-                    <a href="#">Términos</a>
-                    <a href="#">Privacidad</a>
-                    <a href="#">Contacto</a>
+                    <a href="#" onclick="showTerms()">Términos</a>
+                    <a href="#" onclick="showPrivacy()">Privacidad</a>
+                    <a href="mailto:contact@aromaaffairs.co">Contacto</a>
                 </nav>
             </div>
             <div class="footer-disclaimer">
@@ -823,6 +995,30 @@
     </div>
 
     <script>
+        // Age verification
+        function enterSite() {
+            document.getElementById('age-gate').style.display = 'none';
+            localStorage.setItem('ageVerified', 'true');
+        }
+
+        function showTerms() {
+            document.getElementById('terms-modal').classList.add('active');
+        }
+
+        function showPrivacy() {
+            document.getElementById('privacy-modal').classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        window.onload = function() {
+            if (localStorage.getItem('ageVerified') !== 'true') {
+                document.getElementById('age-gate').classList.add('active');
+            }
+        }
+
         // Mobile menu toggle functionality
         const mobileMenuButton = document.querySelector('.mobile-menu-button');
         const mainNav = document.querySelector('.main-nav');
