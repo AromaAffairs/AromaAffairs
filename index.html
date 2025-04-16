@@ -19,6 +19,7 @@
         body {
             margin: 0;
             padding: 0;
+            padding-bottom: 40px; /* Space for bottom banner */
             font-family: 'Poppins', sans-serif;
             background: #1a1a1a;
             color: #fff;
@@ -41,6 +42,11 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1002;
         }
         .notification-bar .new-badge {
             background-color: #fff;
@@ -67,7 +73,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
+            position: fixed;
+            top: 40px; /* Below notification bar */
+            left: 0;
+            width: 100%;
             z-index: 1001;
         }
         .logo-container a {
@@ -89,6 +98,7 @@
         }
         .main-nav.active {
             display: flex;
+            z-index: 1003; /* Above bottom banner */
         }
         .nav-item-container {
             position: relative;
@@ -175,6 +185,7 @@
             align-items: center;
             flex-wrap: wrap;
             position: relative;
+            margin-top: 100px; /* Space for fixed header and notification bar */
         }
         .hero-left-image {
             flex: 1;
@@ -348,58 +359,28 @@
             box-shadow: 0 0 20px rgba(255, 204, 0, 0.2);
         }
 
-        /* Footer styles */
-        .site-footer {
-            background-color: #1a1a1a;
-            color: #aaaaaa;
-            padding: 20px 0;
-            font-family: 'Arial', sans-serif;
-            font-size: 12px;
-        }
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        .footer-main {
+        /* Bottom banner styles */
+        .bottom-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #7200ff;
+            color: white;
+            padding: 10px 20px;
+            font-weight: 500;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #333;
-            margin-bottom: 15px;
+            gap: 10px;
+            z-index: 1000;
         }
-        .footer-brand {
-            display: flex;
-            align-items: center;
-        }
-        .footer-brand p {
-            margin: 0;
-            margin-right: 20px;
-        }
-        .join-link {
-            color: #ff6b6b;
+        .bottom-banner a {
+            color: white;
             text-decoration: none;
-            font-weight: bold;
-            transition: color 0.3s;
         }
-        .join-link:hover {
-            color: #ff8e8e;
-        }
-        .footer-links a {
-            color: #aaaaaa;
-            text-decoration: none;
-            margin-left: 15px;
-            transition: color 0.3s;
-        }
-        .footer-links a:hover {
-            color: #ffffff;
-        }
-        .footer-disclaimer {
-            line-height: 1.5;
-        }
-        .footer-disclaimer small {
-            opacity: 0.7;
+        .bottom-banner a:hover {
+            text-decoration: underline;
         }
 
         /* Responsive styles */
@@ -416,7 +397,7 @@
                 bottom: 0;
                 background-color: #131825;
                 flex-direction: column;
-                z-index: 1000;
+                z-index: 1003;
                 padding: 60px 20px 20px;
                 overflow-y: auto;
             }
@@ -509,14 +490,14 @@
     </style>
 </head>
 <body role="document">
-    <!-- Notification Bar -->
+    <!-- Notification Bar (Fixed) -->
     <div class="notification-bar">
         <span class="new-badge">Nuevo</span>
         <span>Curso Del Señor Pies 2025</span>
         <a href="https://drive.google.com/drive/u/9/folders/151hzbVUyRwl-noW9HLqvCfbTCTyKR0Jw">GRATIS <span class="arrow">→</span></a>
     </div>
 
-    <!-- Main Header -->
+    <!-- Main Header (Fixed) -->
     <header class="main-header">
         <div class="logo-container">
             <a href="#">
@@ -675,6 +656,12 @@
             </div>
         </div>
     </footer>
+
+    <!-- Bottom Banner (Fixed) -->
+    <div class="bottom-banner">
+        <span>¡Suscríbete para más actualizaciones!</span>
+        <a href="#">Suscribirse</a>
+    </div>
 
     <script>
         // Mobile menu toggle functionality
