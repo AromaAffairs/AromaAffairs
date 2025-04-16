@@ -15,14 +15,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <title>AromaAffairs - Eleva Tu Juego de Creador</title>
     <style>
-        /* Existing styles unchanged, adding new styles for terms, privacy, and age gate */
+        /* Reset and base styles */
         * {
             box-sizing: border-box;
-        }
-        body {
             margin: 0;
             padding: 0;
-            padding-bottom: 40px;
+        }
+        body {
             font-family: 'Poppins', sans-serif;
             background: #1a1a1a;
             color: #fff;
@@ -83,6 +82,7 @@
             right: 0;
             width: 100%;
             z-index: 1001;
+            box-sizing: border-box;
         }
         .logo-container a {
             display: flex;
@@ -633,6 +633,9 @@
             .mobile-menu-button {
                 display: block;
             }
+            .main-header {
+                padding: 15px 10px;
+            }
             .main-nav {
                 display: none;
                 position: fixed;
@@ -767,7 +770,7 @@
     <!-- Terms of Use Modal -->
     <div id="terms-modal" class="modal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('terms-modal')">&times;</button>
+            <button class="modal-close" onclick="closeModal('terms-modal')">×</button>
             <h2>Términos de Uso</h2>
             <p>Última actualización: 16 de abril de 2025</p>
             <p>Al acceder a esta plataforma ("Sitio"), aceptas estar vinculado por los siguientes términos y condiciones. Si no estás de acuerdo, por favor abandona el sitio inmediatamente.</p>
@@ -788,7 +791,7 @@
     <!-- Privacy Policy Modal -->
     <div id="privacy-modal" class="modal">
         <div class="modal-content">
-            <button class="modal-close" onclick="closeModal('privacy-modal')">&times;</button>
+            <button class="modal-close" onclick="closeModal('privacy-modal')">×</button>
             <h2>Política de Privacidad</h2>
             <p>Última actualización: 16 de abril de 2025</p>
             <p>Nos tomamos tu privacidad en serio. Este sitio no recopila información personal de los usuarios directamente. No requerimos registro, y no rastreamos a los usuarios más allá de herramientas analíticas básicas (si las hay).</p>
@@ -811,7 +814,7 @@
     <header class="main-header">
         <div class="logo-container">
             <a href="#">
-                <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main CLEAR/LOGO.png" alt="AromaAffairs Logo">
+                <img src="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/refs/heads/main/LOGO.png" alt="AromaAffairs Logo">
                 AROMAAFFAIRS.CO
             </a>
         </div>
@@ -831,7 +834,7 @@
                     <a href="#">Curso Streamer</a>
                     <a href="#">Curso SofiaGray</a>
                     <a href="#">Curso Chaturbate</a>
-31: <a href="https://www.adultcreatorsonline.com/products/unlimited-lifetime-access-whole-store-all-future-releases-included?ref=LATAMIMAGE">Acceso de por vida</a>
+                    <a href="https://www.adultcreatorsonline.com/products/unlimited-lifetime-access-whole-store-all-future-releases-included?ref=LATAMIMAGE">Acceso de por vida</a>
                 </div>
             </div>
             <div class="dropdown">
@@ -997,7 +1000,7 @@
     <script>
         // Age verification
         function enterSite() {
-            document.getElementById('age-gate').style.display = 'none';
+            document.getElementById('age-gate').classList.remove('active');
             localStorage.setItem('ageVerified', 'true');
         }
 
