@@ -22,7 +22,7 @@
         body {
             margin: 0;
             padding: 0;
-            padding-bottom: 40px; /* Space for bottom banner */
+            padding-bottom: 40px;
             font-family: 'Poppins', sans-serif;
             background: #1a1a1a;
             color: #fff;
@@ -155,6 +155,36 @@
         .dropdown .nav-item .dropdown-icon {
             font-size: 0.7em;
             margin-left: 5px;
+        }
+        /* Nested dropdown styles */
+        .dropdown .nested-dropdown {
+            position: relative;
+            width: 100%;
+        }
+        .dropdown .nested-dropdown .nested-nav-item {
+            padding: 8px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+        }
+        .dropdown .nested-dropdown .nested-nav-item:hover {
+            background-color: #1f2637;
+        }
+        .dropdown .nested-dropdown .nested-dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #131825;
+            min-width: 180px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            border-radius: 4px;
+            top: 0;
+            left: 100%;
+            z-index: 101;
+        }
+        .dropdown .nested-dropdown:hover .nested-dropdown-content {
+            display: block;
         }
         .close-menu {
             display: none;
@@ -415,7 +445,7 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
-            z-index: 1004;
+            z-index: 1004; /* Changed to be above the mobile menu (z-index: 1003) */
         }
         .bottom-banner a {
             color: white;
@@ -525,6 +555,18 @@
             .dropdown.active .dropdown-content {
                 display: block;
             }
+            .dropdown .nested-dropdown .nested-dropdown-content {
+                position: static;
+                width: 100%;
+                box-shadow: none;
+                background-color: #2a3147;
+            }
+            .dropdown .nested-dropdown:hover .nested-dropdown-content {
+                display: none;
+            }
+            .dropdown .nested-dropdown.active .nested-dropdown-content {
+                display: block;
+            }
             .close-menu {
                 display: block;
             }
@@ -606,7 +648,7 @@
             <div class="dropdown">
                 <a href="#" class="nav-item">Eventos <span class="dropdown-icon">▼</span></a>
                 <div class="dropdown-content">
-                    <a href="/eventos.html">Concurso</a>
+                    <a href="eventos.html">Concurso</a>
                 </div>
             </div>
             <div class="dropdown">
@@ -638,10 +680,25 @@
             <div class="dropdown">
                 <a href="#" class="nav-item">Asociarse con nosotros <span class="dropdown-icon">▼</span></a>
                 <div class="dropdown-content">
-                    <a href="https://t.mbslr2.com/370315/8780/32506?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN">JerkMate Colombia</a>
-                    <a href="https://t.mbslr2.com/370315/8780/32514?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN">Latinas Al Poder</a>
-                    <a href="https://t.mbslr2.com/370315/8780/32496?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN">Mandar y obedecer - Juego de rol</a>
-                    <a href="https://t.mbslr2.com/370315/8780/32498?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN">Cosplay</a>
+                    <div class="nested-dropdown">
+                        <a href="#" class="nested-nav-item">Stream para adultos <span class="dropdown-icon">▼</span></a>
+                        <div class="nested-dropdown-content">
+                            <a href="https://t.mbslr2.com/370315/8780/32506?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN">JerkMate Colombia</a>
+                            <a href="https://t.mbslr2.com/370315/8780/32514?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN">Latinas Al Poder</a>
+                            <a href="https://t.mbslr2.com/370315/8780/32496?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN">Mandar y obedecer - Juego de rol</a>
+                            <a href="https://t.mbslr2.com/370315/8780/32498?bo=2779,2778,2777,2776,2775&po=6533&aff_sub5=SF_006OG000004lmDN">Cosplay</a>
+                        </div>
+                    </div>
+                    <div class="nested-dropdown">
+                        <a href="#" class="nested-nav-item">Co-Creadoras para Marcas <span class="dropdown-icon">▼</span></a>
+                        <div class="nested-dropdown-content">
+                            <a href="#">Registro de Marca</a>
+                            <a href="#">Registro de Co-Creador</a>
+                            <a href="#">Conviértete en un Estudio</a>
+                            <a href="#">Registro de Estudio</a>
+                            <a href="#">Registro de Líder de Familia</a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="dropdown">
@@ -799,6 +856,17 @@
                     e.preventDefault();
                     const dropdown = navItem.parentElement;
                     dropdown.classList.toggle('active');
+                }
+            });
+        });
+
+        // Toggle nested dropdowns on mobile
+        document.querySelectorAll('.nested-dropdown .nested-nav-item').forEach(function(nestedNavItem) {
+            nestedNavItem.addEventListener('click', function(e) {
+                if (window.innerWidth <= 992) {
+                    e.preventDefault();
+                    const nestedDropdown = nestedNavItem.parentElement;
+                    nestedDropdown.classList.toggle('active');
                 }
             });
         });
