@@ -16,6 +16,9 @@
     <title>AromaAffairs - Eleva Tu Juego de Creador</title>
     <style>
         /* Reset and base styles */
+        * {
+            box-sizing: border-box;
+        }
         body {
             margin: 0;
             padding: 0;
@@ -45,6 +48,7 @@
             position: fixed;
             top: 0;
             left: 0;
+            right: 0;
             width: 100%;
             z-index: 1002;
         }
@@ -74,8 +78,9 @@
             justify-content: space-between;
             align-items: center;
             position: fixed;
-            top: 40px; /* Below notification bar */
+            top: 40px;
             left: 0;
+            right: 0;
             width: 100%;
             z-index: 1001;
         }
@@ -98,7 +103,7 @@
         }
         .main-nav.active {
             display: flex;
-            z-index: 1003; /* Above bottom banner */
+            z-index: 1003;
         }
         .nav-item-container {
             position: relative;
@@ -127,12 +132,12 @@
             display: none;
             position: absolute;
             background-color: #131825;
-            min-width: 160px;
+            min-width: 180px;
             box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
             z-index: 100;
             border-radius: 4px;
             top: 100%;
-            left: 0;
+            left: -10px;
         }
         .dropdown-content a {
             color: white;
@@ -170,10 +175,46 @@
             display: none;
             background: none;
             border: none;
-            color: white;
+            color: #fff;
             font-size: 1.5em;
             cursor: pointer;
             z-index: 1002;
+            padding: 10px;
+        }
+        .mobile-menu-button .hamburger {
+            display: block;
+            width: 24px;
+            height: 18px;
+            position: relative;
+        }
+        .mobile-menu-button .hamburger span {
+            background: #fff;
+            display: block;
+            height: 3px;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+        .mobile-menu-button .hamburger span:nth-child(1) {
+            top: 0;
+        }
+        .mobile-menu-button .hamburger span:nth-child(2) {
+            top: 7.5px;
+        }
+        .mobile-menu-button .hamburger span:nth-child(3) {
+            top: 15px;
+        }
+        .mobile-menu-button.active .hamburger span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 7.5px;
+        }
+        .mobile-menu-button.active .hamburger span:nth-child(2) {
+            opacity: 0;
+        }
+        .mobile-menu-button.active .hamburger span:nth-child(3) {
+            transform: rotate(-45deg);
+            top: 7.5px;
         }
 
         /* Hero styles */
@@ -185,7 +226,7 @@
             align-items: center;
             flex-wrap: wrap;
             position: relative;
-            margin-top: 100px; /* Space for fixed header and notification bar */
+            margin-top: 100px;
         }
         .hero-left-image {
             flex: 1;
@@ -364,6 +405,7 @@
             position: fixed;
             bottom: 0;
             left: 0;
+            right: 0;
             width: 100%;
             background-color: #7200ff;
             color: white;
@@ -381,6 +423,60 @@
         }
         .bottom-banner a:hover {
             text-decoration: underline;
+        }
+
+        /* Footer styles */
+        .site-footer {
+            background-color: #1a1a1a;
+            color: #aaaaaa;
+            padding: 20px 0;
+            font-family: 'Arial', sans-serif;
+            font-size: 12px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .footer-main {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+            margin-bottom: 15px;
+        }
+        .footer-brand {
+            display: flex;
+            align-items: center;
+        }
+        .footer-brand p {
+            margin: 0;
+            margin-right: 20px;
+        }
+        .join-link {
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .join-link:hover {
+            color: #ff8e8e;
+        }
+        .footer-links a {
+            color: #aaaaaa;
+            text-decoration: none;
+            margin-left: 15px;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: #ffffff;
+        }
+        .footer-disclaimer {
+            line-height: 1.5;
+        }
+        .footer-disclaimer small {
+            opacity: 0.7;
         }
 
         /* Responsive styles */
@@ -493,7 +589,7 @@
     <!-- Notification Bar (Fixed) -->
     <div class="notification-bar">
         <span class="new-badge">Nuevo</span>
-        <span>Curso Del Señor Pies 2025</span>
+        <span>Curso - Curso Del Señor Pies 2025</span>
         <a href="https://drive.google.com/drive/u/9/folders/151hzbVUyRwl-noW9HLqvCfbTCTyKR0Jw">GRATIS <span class="arrow">→</span></a>
     </div>
 
@@ -568,7 +664,13 @@
                 </div>
             </div>
         </nav>
-        <button class="mobile-menu-button">☰</button>
+        <button class="mobile-menu-button">
+            <span class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+        </button>
     </header>
 
     <header class="hero" role="banner">
@@ -671,7 +773,7 @@
 
         function toggleMenu() {
             mainNav.classList.toggle('active');
-            mobileMenuButton.textContent = mainNav.classList.contains('active') ? '✕' : '☰';
+            mobileMenuButton.classList.toggle('active');
         }
 
         mobileMenuButton.addEventListener('click', toggleMenu);
@@ -679,14 +781,14 @@
         closeMenuLink.addEventListener('click', function(e) {
             e.preventDefault();
             mainNav.classList.remove('active');
-            mobileMenuButton.textContent = '☰';
+            mobileMenuButton.classList.remove('active');
         });
 
         // Close menu when clicking outside
         document.addEventListener('click', function(event) {
             if (!mainNav.contains(event.target) && !mobileMenuButton.contains(event.target)) {
                 mainNav.classList.remove('active');
-                mobileMenuButton.textContent = '☰';
+                mobileMenuButton.classList.remove('active');
             }
         });
 
