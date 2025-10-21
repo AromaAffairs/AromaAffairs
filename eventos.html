@@ -7,10 +7,20 @@
     <meta name="keywords" content="eventos, concurso de pies, aromaaffairs, creadores, talleres">
     <meta name="author" content="SeñorPies">
     <meta name="theme-color" content="#ffcc00">
+    <!-- Open Graph Tags -->
     <meta property="og:title" content="Eventos - AromaAffairs">
     <meta property="og:description" content="Únete a eventos como el Concurso de Pies o crea el tuyo en AromaAffairs.">
     <meta property="og:image" content="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/main/aroma.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <meta property="og:url" content="https://aromaaffairs.co/eventos.html">
+    <meta property="og:type" content="website">
+    <!-- Twitter/X Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Eventos - AromaAffairs">
+    <meta name="twitter:description" content="Únete a eventos como el Concurso de Pies o crea el tuyo en AromaAffairs.">
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/main/aroma.png">
+    <link rel="canonical" href="https://aromaaffairs.co/eventos.html">
     <link rel="icon" href="https://raw.githubusercontent.com/AromaAffairs/AromaAffairs/main/LOGO.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <title>Eventos - AromaAffairs</title>
@@ -256,6 +266,22 @@
             background: #8A2BE2;
             transform: scale(1.05);
         }
+        .rules-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #7200ff;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            animation: purplePulse 2s infinite;
+        }
+        .rules-button:hover {
+            background: #5a00cc;
+            transform: scale(1.05);
+        }
         .back-btn {
             display: inline-block;
             margin-top: 40px;
@@ -281,6 +307,60 @@
             0% { box-shadow: 0 0 0 0 rgba(114, 0, 255, 0.4); }
             70% { box-shadow: 0 0 0 15px rgba(114, 0, 255, 0); }
             100% { box-shadow: 0 0 0 0 rgba(114, 0, 255, 0); }
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #131825;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            position: relative;
+            color: #ccc;
+            text-align: left;
+        }
+        .modal-content h2 {
+            color: #ffcc00;
+            margin-top: 0;
+            text-align: center;
+        }
+        .modal-content ul {
+            margin: 20px 0;
+            padding-left: 20px;
+        }
+        .modal-content ul li {
+            margin-bottom: 10px;
+        }
+        .modal-content p {
+            font-size: 0.9em;
+            margin: 10px 0;
+        }
+        .modal-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            color: #ffcc00;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        .modal-close:hover {
+            color: #e6b800;
         }
 
         /* Footer styles */
@@ -403,7 +483,7 @@
             .event-section {
                 padding: 30px 10px;
             }
-            .cta, .join-button, .back-btn {
+            .cta, .join-button, .back-btn, .rules-button {
                 padding: 12px 20px;
                 font-size: 0.9em;
             }
@@ -426,6 +506,10 @@
             }
             .footer-links a {
                 margin: 0 15px 0 0;
+            }
+            .modal-content {
+                width: 95%;
+                padding: 15px;
             }
         }
     </style>
@@ -530,12 +614,34 @@
                     <p><strong>1er Premio:</strong> $100🎁</p>
                     <a href="https://tango.me/deeplink/q/?target=agent&ref_id=pPg5DDY94nKeU50nj3tpRg&marketing_fl=3" 
                        data-event-id="concurso-de-pies" 
+                       class="join-button"
                        aria-label="Unirse al Concurso de Pies">Unirse al Evento</a>
+                    <a href="#" class="rules-button" data-modal="concurso-de-pies-rules" aria-label="Ver reglas del Concurso de Pies">Reglas</a>
                 </div>
             </div>
             <a href="index.html" class="back-btn" aria-label="Volver a la página principal">Volver</a>
         </section>
     </main>
+
+    <!-- Modal for Event Rules -->
+    <div class="modal" id="concurso-de-pies-rules">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Reglas del Concurso de Pies</h2>
+            <ul>
+                <li>Sube una foto de tus pies en una publicación de Facebook.</li>
+                <li>Únete a través del enlace “Unirse al Evento”.</li>
+                <li>Crea una cuenta de creador y asegúrate de unirte a la Familia Señor Pies para participar.</li>
+                <li>Mantente atento a actualizaciones o cambios.</li>
+                <li>El evento consiste en un concurso de transmisión en vivo donde los creadores mostrarán sus diseños de uñas de los pies. Habrá jueces, y los creadores pueden invitar a sus seguidores a unirse y ayudarlos a ganar.</li>
+                <li>Una vez que todos los participantes hayan mostrado sus pies en la transmisión en vivo, el ganador será anunciado mediante una decisión anónima en la misma transmisión.</li>
+                <li>Para los que no ganen, habrá una segunda oportunidad: se girará una rueda con todos los participantes que no ganaron para tener la chance de ganar $25.</li>
+                <li>Recuerda mostrar un diseño de uñas hermoso ese día y asegúrate de invitar a todos tus seguidores para ayudarte a ganar.</li>
+            </ul>
+            <p><strong>Política de Privacidad del Evento:</strong> La información personal enviada (como fotos o datos de la cuenta) será utilizada únicamente para el propósito del concurso y no será compartida con terceros sin consentimiento. Los participantes deben ser mayores de 18 años. Para más información, consulta nuestros <a href="#">Términos</a> y <a href="#">Privacidad</a> en los enlaces del pie de página.</p>
+            <p><strong>Preguntas:</strong> Si tienes alguna duda sobre cómo participar, envía un correo directo a <a href="mailto:SenorPiesco@Gmail.com?subject=CONCURSO">SenorPiesco@Gmail.com</a> con el asunto “CONCURSO”.</p>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer role="contentinfo" class="site-footer">
@@ -605,6 +711,36 @@
                 const eventId = e.target.getAttribute('data-event-id');
                 alert(`Solicitud para unirse al evento "${eventId}" enviada.`);
             }
+        });
+
+        // Modal functionality
+        document.querySelectorAll('.rules-button').forEach(function(button) {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const modalId = button.getAttribute('data-modal');
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.style.display = 'flex';
+                }
+            });
+        });
+
+        document.querySelectorAll('.modal-close').forEach(function(closeButton) {
+            closeButton.addEventListener('click', function() {
+                const modal = closeButton.closest('.modal');
+                if (modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal').forEach(function(modal) {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
         });
     </script>
 </body>
